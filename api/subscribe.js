@@ -23,8 +23,7 @@ export default async function handler(req, res) {
       body: JSON.stringify({
         email,
         fields: { name: name || '', ...fields },
-        groups: group_id ? [group_id] : [],
-      }),
+        groups: [],
     });
 
     const subData = await subRes.json();

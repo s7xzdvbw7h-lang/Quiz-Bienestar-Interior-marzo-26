@@ -24,7 +24,8 @@ body: JSON.stringify({
   email,
   fields: { name: name || '', ...fields },
   groups: [],
-});const subData = await subRes.json();
+});
+    const subData = await subRes.json();
 
     if (!subRes.ok) {
       return res.status(subRes.status).json({ error: subData.message || 'MailerLite error' });

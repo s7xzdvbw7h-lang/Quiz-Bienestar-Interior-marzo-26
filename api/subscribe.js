@@ -17,16 +17,14 @@ export default async function handler(req, res) {
     const subRes = await fetch('https://connect.mailerlite.com/api/subscribers', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${API_KEY}`,
-      },
-      body: JSON.stringify({
-        email,
-        fields: { name: name || '', ...fields },
-        groups: [],
-    });
-
-    const subData = await subRes.json();
+  'Content-Type': 'application/json',
+  'Authorization': `Bearer ${API_KEY}`,
+},
+body: JSON.stringify({
+  email,
+  fields: { name: name || '', ...fields },
+  groups: [],
+}),    const subData = await subRes.json();
 
     if (!subRes.ok) {
       return res.status(subRes.status).json({ error: subData.message || 'MailerLite error' });

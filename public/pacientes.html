@@ -2,89 +2,99 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Panel de Pacientes | Mente Viva</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:#FAF9F6;font-family:'DM Sans',-apple-system,sans-serif;color:#2C2A25}
-::selection{background:#3D906035}
-input:focus{outline:none;border-color:#3D9060!important;box-shadow:0 0 0 3px rgba(61,144,96,0.08)!important}
-.sf{font-family:'Cormorant Garamond',Georgia,serif}
+body{background:#FAF9F6;font-family:"DM Sans",sans-serif;color:#2C2A25}
+.sf{font-family:"Cormorant Garamond",Georgia,serif}
 .mx{max-width:800px;margin:0 auto;padding:28px 16px 48px}
 .card{background:#fff;border:1.5px solid #EBE8E2;border-radius:14px;padding:16px 18px;margin-bottom:10px}
-.card-lg{border-radius:18px;padding:28px 24px;margin-bottom:16px}
-.btn{width:100%;padding:14px;background:#3D9060;color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif}
+.btn{width:100%;padding:14px;background:#3D9060;color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:600;cursor:pointer}
 .g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:24px}
-.pill{font-size:12px;font-weight:700;padding:3px 10px;border-radius:20px;display:inline-block}
-.bar{height:4px;border-radius:2px;background:#F2F0EB;overflow:hidden;margin-bottom:5px}
+.bar{height:4px;border-radius:2px;background:#F2F0EB;overflow:hidden;margin:4px 0}
 .bar div{height:100%;border-radius:2px}
+.row{display:flex;align-items:center;gap:16px;cursor:pointer}
+.row:hover{opacity:0.85}
 .pri{border:1.5px solid #EBE8E2;border-radius:10px;padding:10px 14px;margin-bottom:6px;display:flex;align-items:center;gap:10px}
-.hidden{display:none}
-.row{display:flex;align-items:center;gap:16px;cursor:pointer;transition:transform 0.2s}
-.row:hover{transform:translateX(4px)}
-.filter-bar{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
-.filter-btn{padding:6px 16px;border-radius:20px;border:1.5px solid #EBE8E2;background:#fff;font-size:12px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;color:#6B6560;transition:all 0.2s}
-.filter-btn.active{background:#3D9060;color:#fff;border-color:#3D9060}
+.hid{display:none}
+input:focus{outline:none;border-color:#3D9060!important}
 </style>
 </head>
 <body>
-<div id="login" style="min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px">
-<div class="card card-lg" style="text-align:center;max-width:400px;width:100%">
-<div style="font-size:32px;margin-bottom:12px">&#x1F512;</div>
+<div id="L" style="min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px">
+<div class="card" style="border-radius:18px;padding:32px;text-align:center;max-width:400px;width:100%">
+<div style="font-size:32px;margin-bottom:12px">&#128274;</div>
 <h1 class="sf" style="font-size:24px;font-weight:600">Panel de Pacientes</h1>
-<p style="font-size:13px;color:#9B9590;margin:6px 0 24px">Mente Viva &middot; Dani Navarro</p>
-<input type="password" id="ki" placeholder="Clave de acceso" style="width:100%;padding:13px 16px;background:#FAFAF7;border:1.5px solid #EBE8E2;border-radius:10px;font-size:15px;font-family:'DM Sans',sans-serif;color:#2C2A25;margin-bottom:12px">
-<p id="le" style="color:#C75B4A;font-size:13px;margin-bottom:10px" class="hidden"></p>
-<button class="btn" onclick="doLogin()">Ingresar</button>
+<p style="font-size:13px;color:#9B9590;margin:6px 0 24px">Mente Viva</p>
+<input type="password" id="K" placeholder="Clave de acceso" style="width:100%;padding:13px 16px;background:#FAFAF7;border:1.5px solid #EBE8E2;border-radius:10px;font-size:15px;color:#2C2A25;margin-bottom:12px">
+<p id="E" style="color:#C75B4A;font-size:13px;margin-bottom:10px" class="hid"></p>
+<button class="btn" id="LB">Ingresar</button>
 </div>
 </div>
-
-<div id="dash" class="hidden">
-<div class="mx">
+<div id="D" class="hid"><div class="mx">
 <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px">
-<div><h1 class="sf" style="font-size:28px;font-weight:600">Panel de Pacientes</h1><p style="font-size:13px;color:#9B9590;margin-top:2px">Mente Viva &middot; Quiz Bienestar</p></div>
-<a href="/" style="font-size:13px;color:#3D9060;text-decoration:none;font-weight:600">&larr; Quiz</a>
+<div><h1 class="sf" style="font-size:28px;font-weight:600">Panel de Pacientes</h1><p style="font-size:13px;color:#9B9590;margin-top:2px">Mente Viva</p></div>
+<a href="/" style="font-size:13px;color:#3D9060;text-decoration:none;font-weight:600">Quiz</a>
 </div>
-<div class="g3" id="stats"></div>
-<div class="filter-bar" id="filters"></div>
-<div id="content"></div>
-</div>
-</div>
-
+<div class="g3" id="S"></div>
+<div id="C"></div>
+</div></div>
 <script>
-var C=["#C75B4A","#D4895A","#D4A84A","#6BAF7B","#3D9060"];
-var L=["Necesita atenci\u00f3n","En riesgo","En desarrollo","Buen camino","Fortaleza"];
+var CO=["#C75B4A","#D4895A","#D4A84A","#6BAF7B","#3D9060"];
+var LB=["Necesita atencion","En riesgo","En desarrollo","Buen camino","Fortaleza"];
 var BG=["#FEF2F0","#FFF5EE","#FFF9EC","#F0F8F2","#E8F5EC"];
-var AN={sueno:"Sue\u00f1o",alimentacion:"Alimentaci\u00f3n",movimiento:"Movimiento",estres:"Estr\u00e9s",emocional:"Emociones",naturaleza:"Naturaleza",vinculos:"V\u00ednculos",suplementacion:"Suplementaci\u00f3n",digital:"Digital"};
-var AI={sueno:"\u{1F319}",alimentacion:"\u{1F957}",movimiento:"\u{1F3C3}",estres:"\u{1F9D8}",emocional:"\u{1F49C}",naturaleza:"\u{1F33F}",vinculos:"\u{1F91D}",suplementacion:"\u{1F48A}",digital:"\u{1F4F1}"};
-var ps=[],filt="all";
-document.getElementById("ki").addEventListener("keydown",function(e){if(e.key==="Enter")doLogin()});
-function doLogin(){var k=document.getElementById("ki").value;var er=document.getElementById("le");er.classList.add("hidden");
-fetch("/api/pacientes?key="+encodeURIComponent(k)).then(function(r){return r.json()}).then(function(d){if(d.error){er.textContent=d.error;er.classList.remove("hidden");return}ps=d.pacientes||[];document.getElementById("login").classList.add("hidden");document.getElementById("dash").classList.remove("hidden");renderFilters();renderList()}).catch(function(){er.textContent="Error";er.classList.remove("hidden")})}
-function fmt(d){if(!d)return"\u2014";return new Date(d).toLocaleDateString("es-AR",{day:"2-digit",month:"short",year:"numeric"})}
-function radar(sc,sz){var cx=sz/2,cy=sz/2,r=sz*.38,n=9,as=2*Math.PI/n,off=-Math.PI/2;var ks=Object.keys(AN);function pt(i,v){var a=off+i*as;return[cx+(v/5*r)*Math.cos(a),cy+(v/5*r)*Math.sin(a)]}var s='<svg viewBox="0 0 '+sz+" "+sz+'" width="'+sz+'" height="'+sz+'">';for(var l=1;l<=5;l++){var pts=ks.map(function(_,i){return pt(i,l).join(",")}).join(" ");s+='<polygon points="'+pts+'" fill="none" stroke="#E5E0D8" stroke-width="'+(l===5?"1.2":"0.5")+'"/>';}var dp=ks.map(function(k,i){return pt(i,sc[k]||0).join(",")}).join(" ");s+='<polygon points="'+dp+'" fill="rgba(61,144,96,0.15)" stroke="#3D9060" stroke-width="1.5" stroke-linejoin="round"/>';ks.forEach(function(k,i){var p=pt(i,sc[k]||0);var v=Math.min(Math.max(sc[k]||1,1),5);s+='<circle cx="'+p[0]+'" cy="'+p[1]+'" r="3" fill="'+C[v-1]+'" stroke="#fff" stroke-width="1.5"/>';});s+="</svg>";return s}
-function renderFilters(){var h='<button class="filter-btn '+(filt==="all"?"active":"")+'" onclick="setFilter(\'all\')">Todos</button>';h+='<button class="filter-btn '+(filt==="paciente"?"active":"")+'" onclick="setFilter(\'paciente\')">Mis Pacientes</button>';h+='<button class="filter-btn '+(filt==="lead"?"active":"")+'" onclick="setFilter(\'lead\')">Leads</button>';document.getElementById("filters").innerHTML=h}
-function setFilter(f){filt=f;renderFilters();renderList()}
-function getFiltered(){if(filt==="all")return ps;if(filt==="paciente")return ps.filter(function(p){return p.referencia==="paciente"});return ps.filter(function(p){return p.referencia!=="paciente"})}
-function renderList(){var fps=getFiltered();var ws=fps.filter(function(p){return p.promedio>0});var avg=ws.length>0?(ws.reduce(function(a,p){return a+p.promedio},0)/ws.length).toFixed(1):"0";
-document.getElementById("stats").innerHTML='<div class="card" style="text-align:center"><span style="font-size:20px;display:block;margin-bottom:4px">\u{1F465}</span><span class="sf" style="font-size:22px;font-weight:700;display:block">'+fps.length+'</span><span style="font-size:11px;color:#9B9590">Total</span></div><div class="card" style="text-align:center"><span style="font-size:20px;display:block;margin-bottom:4px">\u{1F4CA}</span><span class="sf" style="font-size:22px;font-weight:700;display:block">'+ws.length+'</span><span style="font-size:11px;color:#9B9590">Con scores</span></div><div class="card" style="text-align:center"><span style="font-size:20px;display:block;margin-bottom:4px">\u2B50</span><span class="sf" style="font-size:22px;font-weight:700;display:block">'+avg+'/5</span><span style="font-size:11px;color:#9B9590">Promedio</span></div>';
-var h='<h2 class="sf" style="font-size:20px;font-weight:600;margin-bottom:12px">'+({all:"Todos",paciente:"Mis Pacientes",lead:"Leads"}[filt])+" ("+fps.length+")</h2>";
-if(fps.length===0)h+='<p style="color:#9B9590">No hay resultados</p>';
-fps.forEach(function(p,idx){var pi=p.promedio<=2?0:p.promedio<=3?1:p.promedio<=4?3:4;
-h+='<div class="card row" onclick="detail('+ps.indexOf(p)+')"><div>'+radar(p.scores,70)+'</div><div style="flex:1"><div style="display:flex;justify-content:space-between;align-items:center"><h3 style="font-size:16px;font-weight:600;margin:0">'+p.nombre+(p.referencia==="paciente"?' <span style="font-size:10px;background:#E8F5EC;color:#3D9060;padding:2px 8px;border-radius:10px;font-weight:600">PACIENTE</span>':"")+'</h3>'+(p.promedio>0?'<span class="pill" style="background:'+BG[pi]+';color:'+C[pi]+'">'+p.promedio+'/5</span>':"")+'</div><p style="font-size:12px;color:#9B9590;margin-top:2px">'+p.email+'</p><div style="display:flex;gap:12px;margin-top:6px;font-size:11px;color:#9B9590"><span>'+fmt(p.fecha)+'</span><span>'+p.emails_sent+' emails</span><span>'+p.opens+' abiertos</span></div></div><span style="font-size:18px;color:#D0D0D0">\u2192</span></div>'});
-document.getElementById("content").innerHTML=h}
-function detail(idx){var p=ps[idx];var h='<button style="background:none;border:none;font-size:14px;color:#3D9060;font-weight:600;cursor:pointer;margin-bottom:16px" onclick="renderList()">\u2190 Volver</button>';
-h+='<div class="card card-lg"><div style="display:flex;justify-content:space-between;align-items:flex-start"><div><h2 class="sf" style="font-size:24px;font-weight:600">'+p.nombre+(p.referencia==="paciente"?' <span style="font-size:11px;background:#E8F5EC;color:#3D9060;padding:3px 10px;border-radius:10px;font-weight:600">PACIENTE</span>':"")+'</h2><p style="font-size:13px;color:#9B9590;margin-top:2px">'+p.email+'</p><p style="font-size:12px;color:#9B9590;margin-top:4px">Registrado: '+fmt(p.fecha)+' &middot; Emails: '+p.emails_sent+' enviados, '+p.opens+' abiertos</p></div><div style="text-align:center"><div style="display:inline-flex;align-items:baseline;justify-content:center;background:#F0F8F2;border:2px solid #D0E8D6;border-radius:50%;width:64px;height:64px"><span class="sf" style="font-size:24px;font-weight:700;color:#3D9060">'+(p.promedio||"\u2014")+'</span>'+(p.promedio>0?'<span style="font-size:10px;color:#9B9590">/5</span>':"")+'</div></div></div></div>';
-if(p.promedio>0){h+='<div style="display:flex;justify-content:center;margin:0 0 20px">'+radar(p.scores,220)+'</div>';
-h+='<h3 class="sf" style="font-size:18px;font-weight:600;margin-bottom:10px">Resultados por \u00e1rea</h3><div class="g3" style="margin-bottom:20px">';
-Object.entries(p.scores).forEach(function(e){var k=e[0],v=e[1];var c=C[Math.min(Math.max(v-1,0),4)];
-h+='<div class="card" style="border-left:3px solid '+c+';padding:10px 12px"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px"><span style="font-size:12px">'+AI[k]+' '+AN[k]+'</span><span style="font-size:12px;font-weight:700;color:'+c+'">'+v+'/5</span></div><div class="bar"><div style="background:'+c+';width:'+(v/5*100)+'%"></div></div><p style="font-size:9px;color:#9B9590;margin-top:3px">'+L[Math.min(Math.max(v-1,0),4)]+'</p></div>'});
-h+='</div><h3 class="sf" style="font-size:18px;font-weight:600;margin-bottom:10px">\u00c1reas prioritarias</h3>';
-Object.entries(p.scores).sort(function(a,b){return a[1]-b[1]}).slice(0,3).forEach(function(e,i){var k=e[0],v=e[1];
-h+='<div class="pri"'+(i===0?' style="background:#FEF2F0"':'')+' ><span style="font-size:10px;font-weight:700;color:#C75B4A">#'+(i+1)+'</span><span style="font-size:16px">'+AI[k]+'</span><span style="font-size:13px;font-weight:600">'+AN[k]+'</span><span style="margin-left:auto;font-size:12px;font-weight:700;color:'+C[Math.min(Math.max(v-1,0),4)]+'">'+v+'/5</span></div>'});
-}else{h+='<div style="background:#FFF9EC;border:1.5px solid #F5E6C0;border-radius:14px;padding:20px;text-align:center;margin-top:16px"><p style="font-size:14px;color:#8B7A3D">Sin scores del quiz a\u00fan.</p></div>'}
-document.getElementById("content").innerHTML=h}
+var NM={sueno:"Sueno",alimentacion:"Alimentacion",movimiento:"Movimiento",estres:"Estres",emocional:"Emociones",naturaleza:"Naturaleza",vinculos:"Vinculos",suplementacion:"Suplementacion",digital:"Digital"};
+var IC={sueno:"&#127769;",alimentacion:"&#129367;",movimiento:"&#127939;",estres:"&#129496;",emocional:"&#128156;",naturaleza:"&#127807;",vinculos:"&#129309;",suplementacion:"&#128138;",digital:"&#128241;"};
+var ps=[];
+document.getElementById("K").addEventListener("keydown",function(e){if(e.key==="Enter")go();});
+document.getElementById("LB").addEventListener("click",function(){go();});
+function go(){
+var k=document.getElementById("K").value;
+var er=document.getElementById("E");
+er.className="hid";
+fetch("/api/pacientes?key="+encodeURIComponent(k)).then(function(r){return r.json();}).then(function(d){
+if(d.error){er.textContent=d.error;er.className="";return;}
+ps=d.pacientes||[];
+document.getElementById("L").className="hid";
+document.getElementById("D").className="";
+list();
+}).catch(function(){er.textContent="Error de conexion";er.className="";});
+}
+function fmt(d){if(!d)return"-";return new Date(d).toLocaleDateString("es-AR",{day:"2-digit",month:"short",year:"numeric"});}
+function rad(sc,sz){
+var cx=sz/2,cy=sz/2,r=sz*0.38,ks=Object.keys(NM),n=ks.length,a=2*Math.PI/n,o=-Math.PI/2;
+function pt(i,v){var an=o+i*a;return[cx+(v/5*r)*Math.cos(an),cy+(v/5*r)*Math.sin(an)];}
+var s="<svg viewBox=\"0 0 "+sz+" "+sz+"\" width=\""+sz+"\" height=\""+sz+"\">";
+for(var l=1;l<=5;l++){var p=ks.map(function(_,i){return pt(i,l).join(",");}).join(" ");s+="<polygon points=\""+p+"\" fill=\"none\" stroke=\"#E5E0D8\" stroke-width=\"0.5\"/>";}
+var dp=ks.map(function(k,i){return pt(i,sc[k]||0).join(",");}).join(" ");
+s+="<polygon points=\""+dp+"\" fill=\"rgba(61,144,96,0.15)\" stroke=\"#3D9060\" stroke-width=\"1.5\" stroke-linejoin=\"round\"/>";
+ks.forEach(function(k,i){var pp=pt(i,sc[k]||0);var v=Math.min(Math.max(sc[k]||1,1),5);s+="<circle cx=\""+pp[0]+"\" cy=\""+pp[1]+"\" r=\"3\" fill=\""+CO[v-1]+"\" stroke=\"#fff\" stroke-width=\"1.5\"/>";});
+return s+"</svg>";}
+function list(){
+var ws=ps.filter(function(p){return p.promedio>0;});
+var av=ws.length>0?(ws.reduce(function(a,p){return a+p.promedio;},0)/ws.length).toFixed(1):"0";
+document.getElementById("S").innerHTML="<div class=\"card\" style=\"text-align:center\"><span style=\"font-size:20px;display:block;margin-bottom:4px\">&#128101;</span><span class=\"sf\" style=\"font-size:22px;font-weight:700;display:block\">"+ps.length+"</span><span style=\"font-size:11px;color:#9B9590\">Total</span></div><div class=\"card\" style=\"text-align:center\"><span style=\"font-size:20px;display:block;margin-bottom:4px\">&#128202;</span><span class=\"sf\" style=\"font-size:22px;font-weight:700;display:block\">"+ws.length+"</span><span style=\"font-size:11px;color:#9B9590\">Con scores</span></div><div class=\"card\" style=\"text-align:center\"><span style=\"font-size:20px;display:block;margin-bottom:4px\">&#11088;</span><span class=\"sf\" style=\"font-size:22px;font-weight:700;display:block\">"+av+"/5</span><span style=\"font-size:11px;color:#9B9590\">Promedio</span></div>";
+var h="<h2 class=\"sf\" style=\"font-size:20px;font-weight:600;margin-bottom:12px\">Todos ("+ps.length+")</h2>";
+ps.forEach(function(p,i){
+var pi=p.promedio<=2?0:p.promedio<=3?1:p.promedio<=4?3:4;
+h+="<div class=\"card row\" onclick=\"det("+i+")\"><div>"+rad(p.scores,70)+"</div><div style=\"flex:1\"><div style=\"display:flex;justify-content:space-between;align-items:center\"><h3 style=\"font-size:16px;font-weight:600;margin:0\">"+p.nombre+"</h3>"+(p.promedio>0?"<span style=\"font-size:12px;font-weight:700;padding:3px 10px;border-radius:20px;background:"+BG[pi]+";color:"+CO[pi]+"\">"+p.promedio+"/5</span>":"")+"</div><p style=\"font-size:12px;color:#9B9590;margin-top:2px\">"+p.email+"</p><div style=\"display:flex;gap:12px;margin-top:6px;font-size:11px;color:#9B9590\"><span>"+fmt(p.fecha)+"</span><span>"+p.emails_sent+" emails</span><span>"+p.opens+" abiertos</span></div></div></div>";});
+document.getElementById("C").innerHTML=h;}
+function det(i){
+var p=ps[i];
+var h="<button style=\"background:none;border:none;font-size:14px;color:#3D9060;font-weight:600;cursor:pointer;margin-bottom:16px\" onclick=\"list()\">&#8592; Volver</button>";
+h+="<div class=\"card\" style=\"border-radius:18px;padding:24px;margin-bottom:16px\"><div style=\"display:flex;justify-content:space-between\"><div><h2 class=\"sf\" style=\"font-size:24px;font-weight:600\">"+p.nombre+"</h2><p style=\"font-size:13px;color:#9B9590;margin-top:2px\">"+p.email+"</p><p style=\"font-size:12px;color:#9B9590;margin-top:4px\">"+fmt(p.fecha)+" | "+p.emails_sent+" emails, "+p.opens+" abiertos</p></div><div style=\"text-align:center\"><div style=\"display:inline-flex;align-items:baseline;justify-content:center;background:#F0F8F2;border:2px solid #D0E8D6;border-radius:50%;width:64px;height:64px\"><span class=\"sf\" style=\"font-size:24px;font-weight:700;color:#3D9060\">"+(p.promedio||"-")+"</span>"+(p.promedio>0?"<span style=\"font-size:10px;color:#9B9590\">/5</span>":"")+"</div></div></div></div>";
+if(p.promedio>0){
+h+="<div style=\"display:flex;justify-content:center;margin:0 0 20px\">"+rad(p.scores,220)+"</div>";
+h+="<h3 class=\"sf\" style=\"font-size:18px;font-weight:600;margin-bottom:10px\">Resultados</h3><div class=\"g3\" style=\"margin-bottom:20px\">";
+Object.entries(p.scores).forEach(function(e){var k=e[0],v=e[1];var c=CO[Math.min(Math.max(v-1,0),4)];
+h+="<div class=\"card\" style=\"border-left:3px solid "+c+";padding:10px 12px\"><div style=\"display:flex;justify-content:space-between;margin-bottom:4px\"><span style=\"font-size:12px\">"+IC[k]+" "+NM[k]+"</span><span style=\"font-size:12px;font-weight:700;color:"+c+"\">"+v+"/5</span></div><div class=\"bar\"><div style=\"background:"+c+";width:"+(v/5*100)+"%\"></div></div><p style=\"font-size:9px;color:#9B9590\">"+LB[Math.min(Math.max(v-1,0),4)]+"</p></div>";});
+h+="</div><h3 class=\"sf\" style=\"font-size:18px;font-weight:600;margin-bottom:10px\">Prioridades</h3>";
+Object.entries(p.scores).sort(function(a,b){return a[1]-b[1];}).slice(0,3).forEach(function(e,j){var k=e[0],v=e[1];
+h+="<div class=\"pri\""+(j===0?" style=\"background:#FEF2F0\"":"")+"><span style=\"font-size:10px;font-weight:700;color:#C75B4A\">#"+(j+1)+"</span><span style=\"font-size:16px\">"+IC[k]+"</span><span style=\"font-size:13px;font-weight:600\">"+NM[k]+"</span><span style=\"margin-left:auto;font-size:12px;font-weight:700;color:"+CO[Math.min(Math.max(v-1,0),4)]+"\">"+v+"/5</span></div>";});
+}else{h+="<div style=\"background:#FFF9EC;border:1.5px solid #F5E6C0;border-radius:14px;padding:20px;text-align:center\"><p style=\"font-size:14px;color:#8B7A3D\">Sin scores del quiz aun.</p></div>";}
+document.getElementById("C").innerHTML=h;}
 </script>
 </body>
-  </html>
+</html>

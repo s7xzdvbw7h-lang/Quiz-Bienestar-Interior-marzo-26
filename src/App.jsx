@@ -128,6 +128,7 @@ export default function App() {
     if (!email.trim()) { setErr("Ingresá tu email"); return; }
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { setErr("Revisá que tu email esté bien"); return; }
     setSending(true);
+    const refParam = new URLSearchParams(window.location.search).get("ref") || "";
     const finalScores = { ...scores };
     const finalAvg = (Object.values(finalScores).reduce((x, y) => x + y, 0) / Object.values(finalScores).length).toFixed(1);
     const payload = {
@@ -159,6 +160,7 @@ export default function App() {
             quiz_suplementacion: finalScores.suplementacion || 0,
             quiz_digital: finalScores.digital || 0,
             quiz_promedio: parseFloat(finalAvg),
+            ...(refParam && { referencia: refParam }),
           },
         }),
       });

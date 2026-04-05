@@ -59,6 +59,96 @@ input:focus{outline:none;border-color:#3D9060;box-shadow:0 0 0 3px rgba(61,144,9
   var BGCOLORS = ["#FEF2F0","#FFF5EE","#FFF9EC","#F0F8F2","#E8F5EC"];
   var NAMES = {sueno:"Sue\u00f1o",alimentacion:"Alimentaci\u00f3n",movimiento:"Movimiento",estres:"Estr\u00e9s",emocional:"Emociones",naturaleza:"Naturaleza",vinculos:"V\u00ednculos",suplementacion:"Suplementaci\u00f3n",digital:"Digital"};
   var ICONS = {sueno:"\ud83c\udf19",alimentacion:"\ud83e\udd57",movimiento:"\ud83c\udfc3",estres:"\ud83e\uddd8\u200d\u2640\ufe0f",emocional:"\ud83d\udc9c",naturaleza:"\ud83c\udf3f",vinculos:"\ud83e\udd1d",suplementacion:"\ud83d\udc8a",digital:"\ud83d\udcf1"};
+
+  // Descripciones por área para el resumen al paciente
+  var AREA_DESC = {
+    sueno: {
+      bajo: "Tu descanso es una prioridad urgente. Sin sue\u00f1o reparador, ning\u00fan otro h\u00e1bito puede funcionar bien. Vamos a trabajar en tu higiene del sue\u00f1o desde la primera sesi\u00f3n.",
+      medio: "Tu sue\u00f1o tiene margen de mejora importante. Peque\u00f1os cambios en tu rutina nocturna pueden transformar tu energ\u00eda y estado de \u00e1nimo diario.",
+      alto: "Tu descanso es una base s\u00f3lida. Vamos a cuidarlo y optimizarlo para que siga siendo un pilar en tu bienestar."
+    },
+    alimentacion: {
+      bajo: "Tu alimentaci\u00f3n es un \u00e1rea clave a transformar. Lo que com\u00e9s impacta directamente en tu energ\u00eda, humor y claridad mental. Vamos a construir un plan realista y sostenible para vos.",
+      medio: "Tu alimentaci\u00f3n tiene buenas bases pero hay oportunidades concretas de mejora. Con ajustes simples y personalizados, pod\u00e9s notar cambios importantes.",
+      alto: "Tu relaci\u00f3n con la alimentaci\u00f3n es una fortaleza. Seguiremos potenci\u00e1ndola con enfoque funcional y antiinflamatorio."
+    },
+    movimiento: {
+      bajo: "Tu cuerpo necesita m\u00e1s movimiento. No hablamos de gym ni de sacrificio, sino de encontrar la forma de moverse que a vos te nutra y te genere energ\u00eda.",
+      medio: "Ten\u00e9s un v\u00ednculo con el movimiento que podemos profundizar. Vamos a ver qu\u00e9 tipo de actividad f\u00edsica te energiza y te sostiene en el tiempo.",
+      alto: "El movimiento es una de tus fortalezas. Vamos a asegurarnos de que est\u00e9 alineado con tus objetivos y que tu cuerpo tenga la recuperaci\u00f3n que necesita."
+    },
+    estres: {
+      bajo: "Tu nivel de estr\u00e9s es una se\u00f1al de alerta importante. El sistema nervioso necesita atenci\u00f3n urgente. Vamos a trabajar herramientas concretas para regularlo.",
+      medio: "El estr\u00e9s est\u00e1 presente y est\u00e1 afectando tu calidad de vida. Vamos a explorar qu\u00e9 lo dispara y c\u00f3mo respond\u00e9s, para darte herramientas reales.",
+      alto: "Gestion\u00e1s bien el estr\u00e9s. Seguiremos fortaleciendo tu capacidad de regulaci\u00f3n y resiliencia."
+    },
+    emocional: {
+      bajo: "Tu mundo emocional necesita espacio y atenci\u00f3n. Aprenderemos a identificar, validar y canalizar tus emociones de manera saludable.",
+      medio: "Tu vida emocional tiene potencial para ganar profundidad y equilibrio. Vamos a trabajar en tu autoconocimiento y en herramientas para procesar lo que sent\u00eds.",
+      alto: "Tu inteligencia emocional es una fortaleza genuina. Seguiremos desarrollando tu capacidad de conexi\u00f3n con vos mismo/a y con los dem\u00e1s."
+    },
+    naturaleza: {
+      bajo: "La reconexi\u00f3n con la naturaleza puede ser m\u00e1s poderosa de lo que imagin\u00e1s para tu bienestar. Vamos a encontrar formas pr\u00e1cticas de incorporarla en tu d\u00eda a d\u00eda.",
+      medio: "Expos\u00e9s a la naturaleza con cierta frecuencia, pero hay espacio para profundizar este h\u00e1bito y aprovechar todos sus beneficios.",
+      alto: "Tu contacto con la naturaleza es un recurso valioso. Seguiremos aprovech\u00e1ndolo como ancla de bienestar."
+    },
+    vinculos: {
+      bajo: "Tus v\u00ednculos y red de apoyo es un \u00e1rea que merece atenci\u00f3n. Las conexiones significativas son esenciales para la salud integral. Vamos a explorar c\u00f3mo nutrirlas.",
+      medio: "Tus relaciones tienen un buen potencial. Vamos a ver c\u00f3mo fortalecer tu red de apoyo y mejorar la calidad de tus conexiones.",
+      alto: "Tus v\u00ednculos son una fuente real de fortaleza. Seguiremos cultivando relaciones que te nutran y te sostengan."
+    },
+    suplementacion: {
+      bajo: "La suplementaci\u00f3n inteligente puede ser una herramienta poderosa para tu bienestar. Vamos a evaluar qu\u00e9 necesita tu cuerpo seg\u00fan tus resultados.",
+      medio: "Ten\u00e9s una base de suplementaci\u00f3n pero hay margen para optimizarla. Vamos a revisar qu\u00e9 ajustes pueden potenciar tus resultados.",
+      alto: "Tu suplementaci\u00f3n est\u00e1 bien encaminada. Seguiremos ajust\u00e1ndola seg\u00fan tus necesidades y objetivos."
+    },
+    digital: {
+      bajo: "Tu relaci\u00f3n con la tecnolog\u00eda est\u00e1 afectando tu bienestar de forma significativa. Trabajaremos juntos/as en establecer l\u00edmites saludables y recuperar presencia en tu vida.",
+      medio: "Existe una oportunidad importante de mejorar tu higiene digital. Peque\u00f1os cambios en c\u00f3mo us\u00e1s la tecnolog\u00eda pueden tener un gran impacto.",
+      alto: "Ten\u00e9s una buena relaci\u00f3n con la tecnolog\u00eda. Seguiremos cuidando ese equilibrio."
+    }
+  };
+
+  function getAreaDesc(key, score) {
+    var d = AREA_DESC[key];
+    if (!d) return "";
+    if (score <= 2) return d.bajo;
+    if (score <= 3) return d.medio;
+    return d.alto;
+  }
+
+  function generateSummaryText(p) {
+    var sorted = Object.entries(p.scores).sort(function(a,b){return a[1]-b[1];});
+    var prioridades = sorted.slice(0,3);
+    var fortalezas = sorted.slice(-2).reverse().filter(function(e){return e[1]>=4;});
+    var nombrePrimero = p.nombre.split(" ")[0];
+
+    var txt = "Hola " + nombrePrimero + " \ud83c\udf3f\n\n";
+    txt += "Gracias por completar tu Quiz de Bienestar Mente Viva. ";
+    txt += "Estos son los resultados de tu evaluaci\u00f3n integral y las \u00e1reas en las que vamos a enfocarnos juntos/as:\n\n";
+    txt += "\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\n";
+    txt += "\ud83c\udfaf PUNTAJE GENERAL: " + p.promedio + "/5\n";
+    txt += "\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\n\n";
+    txt += "\ud83d\udd0d \u00c1REAS PRIORITARIAS A TRABAJAR:\n\n";
+    prioridades.forEach(function(e, i) {
+      var k=e[0], v=e[1];
+      txt += (i+1) + ". " + ICONS[k] + " " + NAMES[k].toUpperCase() + " \u2014 " + v + "/5\n";
+      txt += getAreaDesc(k, v) + "\n\n";
+    });
+    if (fortalezas.length > 0) {
+      txt += "\u2728 TUS FORTALEZAS:\n\n";
+      fortalezas.forEach(function(e) {
+        var k=e[0], v=e[1];
+        txt += ICONS[k] + " " + NAMES[k] + " (" + v + "/5) \u2014 " + getAreaDesc(k, v) + "\n\n";
+      });
+    }
+    txt += "\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\n\n";
+    txt += "Estas son las \u00e1reas desde las que vamos a construir tu bienestar integral. ";
+    txt += "En nuestros pr\u00f3ximos encuentros, trabajaremos con estrategias personalizadas, concretas y sostenibles para vos.\n\n";
+    txt += "Con cari\u00f1o,\nDani Navarro \u2022 Mente Viva";
+    return txt;
+  }
+
   var patients = [];
 
   var keyInput = document.getElementById("keyInput");
@@ -179,6 +269,37 @@ input:focus{outline:none;border-color:#3D9060;box-shadow:0 0 0 3px rgba(61,144,9
           '<span style="font-size:13px;font-weight:600">'+NAMES[k]+'</span>' +
           '<span style="margin-left:auto;font-size:12px;font-weight:700;color:'+COLORS[Math.min(v-1,4)]+'">'+v+'/5</span></div>';
       });
+
+      // ——— BLOQUE: RESUMEN PARA PACIENTE ———
+      var summaryText = generateSummaryText(p);
+      var summaryLines = summaryText.split("\n");
+      var summaryHtml = summaryLines.map(function(line) {
+        if (!line.trim()) return '<br>';
+        if (line.startsWith("Hola ")) return '<p style="font-size:15px;font-weight:600;color:#2C2A25;margin-bottom:6px">'+line+'</p>';
+        if (line.startsWith("\u2014\u2014\u2014")) return '<hr style="border:none;border-top:1.5px solid #EBE8E2;margin:12px 0">';
+        if (line.startsWith("\ud83c\udfaf") || line.startsWith("\ud83d\udd0d") || line.startsWith("\u2728")) return '<p style="font-size:13px;font-weight:700;color:#2C2A25;letter-spacing:.4px;margin:12px 0 6px">'+line+'</p>';
+        if (/^\d\./.test(line)) return '<p style="font-size:13px;font-weight:700;color:#3D9060;margin-bottom:4px">'+line+'</p>';
+        if (line.startsWith("Con cari\u00f1o")) return '<p style="font-size:13px;font-style:italic;color:#9B9590;margin-top:4px">'+line+'</p>';
+        if (line.startsWith("Dani Navarro")) return '<p style="font-size:13px;font-weight:600;color:#2C2A25">'+line+'</p>';
+        return '<p style="font-size:13px;color:#5A5650;line-height:1.55;margin-bottom:2px">'+line+'</p>';
+      }).join("");
+
+      h += '<div style="background:linear-gradient(135deg,#F5FBF7 0%,#EEF8F2 100%);border:1.5px solid #C8E6D4;border-radius:18px;padding:24px;margin-top:24px">' +
+        '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">' +
+          '<div>' +
+            '<h3 class="sf" style="font-size:20px;font-weight:600;color:#2C2A25">Resumen para el paciente</h3>' +
+            '<p style="font-size:12px;color:#9B9590;margin-top:2px">Listo para copiar y enviar por WhatsApp o email</p>' +
+          '</div>' +
+          '<button id="copyBtn" style="display:flex;align-items:center;gap:6px;padding:9px 16px;background:#3D9060;color:#fff;border:none;border-radius:10px;font-size:13px;font-weight:600;cursor:pointer;font-family:DM Sans,sans-serif;white-space:nowrap">'+
+            '<span>\ud83d\udccb</span><span>Copiar texto</span>' +
+          '</button>' +
+        '</div>' +
+        '<div id="summaryPreview" style="background:#fff;border:1.5px solid #D8EEE2;border-radius:12px;padding:20px 22px;line-height:1.6">' +
+          summaryHtml +
+        '</div>' +
+        '<p id="copyFeedback" style="font-size:12px;color:#3D9060;font-weight:600;margin-top:10px;display:none">&#10003; \u00a1Texto copiado! Ya pod\u00e9s pegarlo en WhatsApp o email.</p>' +
+      '</div>';
+
     } else {
       h += '<div style="background:#FFF9EC;border:1.5px solid #F5E6C0;border-radius:14px;padding:20px;text-align:center;margin-top:16px">' +
         '<span style="font-size:24px">\u26a0\ufe0f</span>' +
@@ -186,6 +307,34 @@ input:focus{outline:none;border-color:#3D9060;box-shadow:0 0 0 3px rgba(61,144,9
     }
     contentDiv.innerHTML = h;
     document.getElementById("backBtn").addEventListener("click", function() { renderList(); });
+    if (p.promedio > 0) {
+      document.getElementById("copyBtn").addEventListener("click", function() {
+        var summaryText = generateSummaryText(p);
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(summaryText).then(function() {
+            var fb = document.getElementById("copyFeedback");
+            var btn = document.getElementById("copyBtn");
+            fb.style.display = "block";
+            btn.querySelector("span:last-child").textContent = "\u00a1Copiado!";
+            setTimeout(function() {
+              fb.style.display = "none";
+              btn.querySelector("span:last-child").textContent = "Copiar texto";
+            }, 3000);
+          });
+        } else {
+          // fallback para navegadores sin clipboard API
+          var ta = document.createElement("textarea");
+          ta.value = summaryText;
+          ta.style.position = "fixed"; ta.style.opacity = "0";
+          document.body.appendChild(ta);
+          ta.select(); document.execCommand("copy");
+          document.body.removeChild(ta);
+          var fb = document.getElementById("copyFeedback");
+          fb.style.display = "block";
+          setTimeout(function(){ fb.style.display = "none"; }, 3000);
+        }
+      });
+    }
   }
 
   // EVENT LISTENERS - using addEventListener (not inline onclick)

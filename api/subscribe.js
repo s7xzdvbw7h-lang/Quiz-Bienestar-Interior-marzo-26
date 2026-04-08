@@ -13,6 +13,72 @@ const AREAS = [
 const COLORS = { 1: "#C75B4A", 2: "#D4895A", 3: "#D4A84A", 4: "#6BAF7B", 5: "#3D9060" };
 const LABELS = { 1: "Necesita atención", 2: "En riesgo", 3: "En desarrollo", 4: "Buen camino", 5: "Fortaleza" };
 
+const TIPS = {
+  sueno: [
+    "Elegí una hora fija para acostarte y mantenela toda la semana — incluyendo fines de semana. La consistencia importa más que la cantidad.",
+    "Creá una rutina pre-sueño: 60 min antes empezá a bajar luces y dejá el celular fuera del cuarto.",
+    "Sumá el 'protocolo de luz': exponete a sol natural en los primeros 30 min del día para sincronizar tu reloj biológico.",
+    "Optimizá tu ambiente: cuarto oscuro, temperatura 18-20°C, sin pantallas en la habitación.",
+    "Experimentá con un diario de sueño para identificar qué hábitos mejoran tu descanso y cuáles lo sabotean.",
+  ],
+  alimentacion: [
+    "Sumá una porción de vegetales verdes a una comida por día. Un solo cambio sostenido ya genera impacto real.",
+    "Reemplazá un ultraprocesado por día con comida real: fruta, frutos secos, huevo o legumbres.",
+    "Probá definir una ventana de alimentación de 12hs (ej: desayunás a las 8 → cenás antes de las 20).",
+    "Sumá más proteína de calidad y grasas saludables: palta, aceite de oliva, frutos secos.",
+    "Seguí escuchando a tu cuerpo. Podés experimentar con nuevos alimentos o recetas que te nutran más.",
+  ],
+  movimiento: [
+    "Empezá caminando 15 min al día. Es la intervención con mejor relación esfuerzo-resultado según la evidencia.",
+    "Sumá una actividad que disfrutes 2 veces por semana. No tiene que ser el gym: bailar, nadar o bici cuentan.",
+    "Incorporá algo de fuerza: sentadillas, flexiones o bandas elásticas. Tu masa muscular es clave para la longevidad.",
+    "Agregá 10 min de movilidad y estiramientos post-entreno. Previene lesiones y mejora la recuperación.",
+    "Desafiate: ¿podés subir 4 pisos sin agitarte? ¿Levantarte del piso sin manos? Tests funcionales reales.",
+  ],
+  estres: [
+    "Probá la respiración 4-7-8 (inhalar 4s, retener 7s, exhalar 8s) tres veces antes de cada comida. Son 60 segundos.",
+    "Elegí UNA práctica de regulación y dedicale 5 min diarios: respiración, journaling o caminata sin celular.",
+    "Identificá tus 3 mayores fuentes de estrés y anotá una pequeña acción para cada una esta semana.",
+    "Sumá prácticas de recuperación activa: tiempo en naturaleza, meditación guiada o contacto con agua fría.",
+    "Compartí lo que aprendiste. Enseñar una técnica consolida el hábito y multiplica el impacto.",
+  ],
+  emocional: [
+    "Empezá un mini-diario emocional: 3 min al día escribiendo qué sentiste y qué lo disparó.",
+    "Practicá nombrar tus emociones en voz alta. Ponerle nombre reduce su intensidad automáticamente.",
+    "Explorá un espacio de acompañamiento (terapia, coaching) como lugar seguro para profundizar.",
+    "Sumá prácticas somáticas: yoga, breathwork o meditación con foco en las sensaciones corporales.",
+    "Tu inteligencia emocional es un activo enorme. Podés usarla para acompañar a otros en su proceso.",
+  ],
+  naturaleza: [
+    "Salí a caminar 20 min en un espacio verde esta semana. Suficiente para reducir cortisol mediblemente.",
+    "Almorzá afuera cuando puedas o caminá descalzo/a en pasto. Las dosis pequeñas cuentan.",
+    "Convertí una actividad semanal en outdoor: caminata, lectura en un parque, mate al sol.",
+    "Llevá tu práctica de ejercicio o meditación al aire libre cuando el clima lo permita.",
+    "Probá una inmersión larga en naturaleza (2+ horas) al menos una vez al mes.",
+  ],
+  vinculos: [
+    "Esta semana escribile a una persona que valorás. No un 'hola qué tal' — algo genuino y personal.",
+    "Priorizá una conversación profunda por semana con alguien importante. Sin celular en la mesa.",
+    "Considerá sumarte a un grupo o comunidad alineada con algo que te interese.",
+    "Profundizá con más vulnerabilidad y presencia. Son el combustible de las relaciones reales.",
+    "Seguí nutriendo tu red con intención. Tus relaciones son tu mayor activo de salud según la ciencia.",
+  ],
+  suplementacion: [
+    "Antes de tomar suplementos, hacete un análisis de sangre completo. Sin datos, estás adivinando.",
+    "Los 3 con más evidencia: vitamina D (si no tomás sol), magnesio y omega-3. Consultá dosis con un profesional.",
+    "Revisá lo que tomás con un profesional para validar si realmente lo necesitás según tus niveles.",
+    "Actualizá tu protocolo cada 6 meses con nuevos análisis. Tu cuerpo cambia constantemente.",
+    "Tu enfoque basado en datos es excelente. Seguí ajustando con información real y profesional.",
+  ],
+  digital: [
+    "Sacá el celular del cuarto a la noche. Si lo usás como alarma, invertí en un reloj despertador.",
+    "Desactivá notificaciones no esenciales. Cada interrupción te saca del foco por hasta 23 minutos.",
+    "Definí una 'zona libre de pantallas' en tu casa: la mesa de comer, tu cuarto, o ambos.",
+    "Sumá momentos sin estímulo digital: tu cerebro necesita esos espacios para entrar en modo reparación.",
+    "Tu relación con la tecnología es saludable. Compartí tus estrategias con alguien que lo necesite.",
+  ],
+};
+
 const AREA_DESC = {
   sueno: {
     bajo: "Tu descanso es una prioridad urgente. Sin sueño reparador, ningún otro hábito puede funcionar bien. Trabajaremos en tu higiene del sueño desde la primera sesión.",
@@ -80,6 +146,13 @@ function getLevelLabel(score) {
 
 function getColor(score) {
   return COLORS[Math.min(Math.max(score, 1), 5)];
+}
+
+function getTip(areaId, score) {
+  const tips = TIPS[areaId];
+  if (!tips) return "";
+  const idx = Math.min(Math.max(Math.round(score) - 1, 0), 4);
+  return tips[idx];
 }
 
 // ─── EMAIL 1: Para Dani (resumen interno profesional) ────────────────────────
@@ -224,6 +297,7 @@ function buildEmailPaciente(nombre, scores, promedio) {
     const v = scores[a.id] || 0;
     const color = getColor(v);
     const desc = getDesc(a.id, v);
+    const tip = getTip(a.id, v);
     const bg = i === 0 ? "#FEF2F0" : i === 1 ? "#FFF5EE" : "#FAFAF7";
     const borderColor = i === 0 ? "#F5C5BC" : i === 1 ? "#F5DEC5" : "#EBE8E2";
     return `
@@ -243,6 +317,12 @@ function buildEmailPaciente(nombre, scores, promedio) {
             </td></tr>
             <tr><td colspan="2" style="padding-top:8px">
               <p style="margin:0;font-size:14px;color:#5A5650;line-height:1.6">${desc}</p>
+            </td></tr>
+            <tr><td colspan="2" style="padding-top:12px">
+              <div style="background:rgba(255,255,255,0.7);border-left:3px solid ${color};border-radius:0 8px 8px 0;padding:10px 14px">
+                <p style="margin:0 0 4px;font-size:10px;font-weight:700;color:${color};letter-spacing:.6px;text-transform:uppercase">Acción concreta</p>
+                <p style="margin:0;font-size:13px;color:#2C2A25;line-height:1.55">${tip}</p>
+              </div>
             </td></tr>
           </table>
         </div>
@@ -380,48 +460,51 @@ export default async function handler(req, res) {
     return res.status(500).json({ error: "Error creando subscriber" });
   }
 
-  // 2. Si la referencia es "paciente", mandar los dos emails
-  if (fields?.referencia === "paciente") {
-    const scores = {};
-    for (const a of AREAS) {
-      scores[a.id] = parseFloat(fields[`quiz_${a.id}`]) || 0;
-    }
-    const promedio = fields.quiz_promedio
-      ? parseFloat(fields.quiz_promedio).toFixed(1)
-      : (Object.values(scores).reduce((s, v) => s + v, 0) / AREAS.length).toFixed(1);
+  // 2. Calcular scores para los emails
+  const scores = {};
+  for (const a of AREAS) {
+    scores[a.id] = parseFloat(fields?.[`quiz_${a.id}`]) || 0;
+  }
+  const promedio = fields?.quiz_promedio
+    ? parseFloat(fields.quiz_promedio).toFixed(1)
+    : (Object.values(scores).reduce((s, v) => s + v, 0) / AREAS.length).toFixed(1);
 
-    const htmlDani     = buildEmailDani(name, email, scores, promedio);
-    const htmlPaciente = buildEmailPaciente(name, scores, promedio);
-    const nombrePrimero = (name || "").split(" ")[0];
+  const mlHeaders = {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${API_KEY}`,
+  };
 
-    const emails = [
-      {
-        from: { email: "hola@daninavarro.com.ar", name: "Dani Navarro · Mente Viva" },
-        to: [{ email: "hola@daninavarro.com.ar" }],
-        subject: `🔔 Nueva paciente completó el Quiz: ${name}`,
-        html: htmlDani,
-      },
-      {
+  // Email a la paciente — SIEMPRE
+  try {
+    await fetch("https://connect.mailerlite.com/api/emails", {
+      method: "POST",
+      headers: mlHeaders,
+      body: JSON.stringify({
         from: { email: "hola@daninavarro.com.ar", name: "Dani Navarro · Mente Viva" },
         to: [{ email, name }],
         subject: "Tu Mapa de Bienestar Interior 🌿",
-        html: htmlPaciente,
-      },
-    ];
+        html: buildEmailPaciente(name, scores, promedio),
+      }),
+    });
+  } catch (err) {
+    console.error("Error enviando email a paciente:", err);
+  }
 
-    for (const payload of emails) {
-      try {
-        await fetch("https://connect.mailerlite.com/api/emails", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${API_KEY}`,
-          },
-          body: JSON.stringify(payload),
-        });
-      } catch (err) {
-        console.error("Error enviando email:", err);
-      }
+  // Email a Dani — solo si referencia === "paciente"
+  if (fields?.referencia === "paciente") {
+    try {
+      await fetch("https://connect.mailerlite.com/api/emails", {
+        method: "POST",
+        headers: mlHeaders,
+        body: JSON.stringify({
+          from: { email: "hola@daninavarro.com.ar", name: "Mente Viva · Quiz" },
+          to: [{ email: "hola@daninavarro.com.ar" }],
+          subject: `🔔 Nueva paciente completó el Quiz: ${name}`,
+          html: buildEmailDani(name, email, scores, promedio),
+        }),
+      });
+    } catch (err) {
+      console.error("Error enviando email a Dani:", err);
     }
   }
 

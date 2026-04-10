@@ -276,146 +276,207 @@ function buildEmailDani(nombre, email, scores, promedio) {
 </body></html>`;
 }
 
-// ─── EMAIL 2: Para la paciente (resumen personalizado) ───────────────────────
+// ─── EMAIL 2: Para la persona que completó el quiz ───────────────────────────
 function buildEmailPaciente(nombre, scores, promedio) {
   const nombrePrimero = nombre.split(" ")[0];
   const sorted = [...AREAS].sort((a, b) => (scores[a.id] || 0) - (scores[b.id] || 0));
   const prioritarias = sorted.slice(0, 3);
-  const fortalezas = sorted.slice(-2).reverse().filter(a => (scores[a.id] || 0) >= 4);
+  const fortalezas = AREAS.filter(a => (scores[a.id] || 0) >= 4)
+    .sort((a, b) => (scores[b.id] || 0) - (scores[a.id] || 0));
 
-  const promedioColor = getColor(Math.round(parseFloat(promedio)));
   const promedioNum = parseFloat(promedio);
-  const promedioMsg = promedioNum <= 2
-    ? "Tu bienestar necesita atención consciente. Pero el primer paso es darte cuenta — y ya lo diste."
-    : promedioNum <= 3
-    ? "Hay áreas importantes que necesitan tu atención. Cambios pequeños y consistentes generan transformaciones grandes."
-    : promedioNum <= 4
-    ? "Estás en buen camino. Tu compromiso con el autoconocimiento ya te diferencia."
-    : "Muy buen nivel de bienestar. Tenés bases sólidas y áreas concretas para seguir creciendo.";
+  const promedioColor = getColor(Math.round(promedioNum));
 
+  // Apertura personalizada según puntaje
+  const apertura = promedioNum <= 2
+    ? `Hacer este quiz requiere honestidad. Y eso, ${nombrePrimero}, ya dice mucho de vos.`
+    : promedioNum <= 3
+    ? `Completar este quiz es el primer gesto real de cuidado hacia vos misma. Me alegra que estés acá.`
+    : promedioNum <= 4
+    ? `Tenés más bases de las que creés. Este mapa te va a ayudar a ver exactamente dónde enfocar la energía.`
+    : `Tu mapa de bienestar muestra una base muy sólida. Lo que viene ahora es seguir afinando.`;
+
+  const cierre = promedioNum <= 2
+    ? `En los próximos días te voy a ir mandando micro-acciones para cada una de tus áreas prioritarias. Una por una. Sin abrumar. Porque el cambio real se construye de a poco, con constancia.`
+    : promedioNum <= 3
+    ? `En los próximos días te comparto micro-acciones concretas para empezar a mover las agujas en tus áreas clave. Cosas que podés hacer hoy, con lo que tenés.`
+    : `En los próximos días te mando tips específicos para potenciar todavía más tu bienestar. Pequeños ajustes que generan un impacto real.`;
+
+  // Bloques de áreas prioritarias
   const prioBlocks = prioritarias.map((a, i) => {
     const v = scores[a.id] || 0;
     const color = getColor(v);
-    const desc = getDesc(a.id, v);
     const tip = getTip(a.id, v);
-    const bg = i === 0 ? "#FEF2F0" : i === 1 ? "#FFF5EE" : "#FAFAF7";
-    const borderColor = i === 0 ? "#F5C5BC" : i === 1 ? "#F5DEC5" : "#EBE8E2";
+    const numColors = ["#C75B4A", "#D4895A", "#D4A84A"];
+    const numBg = ["#FEF2F0", "#FFF5EE", "#FFF9EC"];
+    const cardBg = i === 0 ? "#FFFAF9" : i === 1 ? "#FFFBF7" : "#FAFAF7";
+    const borderColor = i === 0 ? "#F5C5BC" : i === 1 ? "#F5DEC5" : "#E8E4DC";
     return `
-      <tr><td style="padding-bottom:16px">
-        <div style="background:${bg};border:1.5px solid ${borderColor};border-radius:14px;padding:18px 20px">
-          <table width="100%" cellpadding="0" cellspacing="0">
-            <tr>
-              <td>
-                <span style="font-size:11px;font-weight:700;color:#C75B4A;letter-spacing:.5px">#${i + 1} ÁREA PRIORITARIA</span>
-              </td>
-              <td align="right">
-                <span style="font-size:13px;font-weight:700;color:${color}">${v}/5 — ${getLevelLabel(v)}</span>
-              </td>
-            </tr>
-            <tr><td colspan="2" style="padding-top:6px">
-              <p style="margin:0;font-size:17px;font-weight:700;color:#2C2A25">${a.icon} ${a.name}</p>
-            </td></tr>
-            <tr><td colspan="2" style="padding-top:8px">
-              <p style="margin:0;font-size:14px;color:#5A5650;line-height:1.6">${desc}</p>
-            </td></tr>
-            <tr><td colspan="2" style="padding-top:12px">
-              <div style="background:rgba(255,255,255,0.7);border-left:3px solid ${color};border-radius:0 8px 8px 0;padding:10px 14px">
-                <p style="margin:0 0 4px;font-size:10px;font-weight:700;color:${color};letter-spacing:.6px;text-transform:uppercase">Acción concreta</p>
-                <p style="margin:0;font-size:13px;color:#2C2A25;line-height:1.55">${tip}</p>
-              </div>
-            </td></tr>
-          </table>
-        </div>
+      <tr><td style="padding-bottom:14px">
+        <table width="100%" cellpadding="0" cellspacing="0" style="background:${cardBg};border:1.5px solid ${borderColor};border-radius:16px;overflow:hidden">
+          <!-- Cabecera del área -->
+          <tr>
+            <td style="padding:16px 20px 12px">
+              <table width="100%" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td valign="middle">
+                    <table cellpadding="0" cellspacing="0">
+                      <tr>
+                        <td style="background:${numBg[i]};border-radius:50%;width:24px;height:24px;text-align:center;line-height:24px;font-size:11px;font-weight:800;color:${numColors[i]};font-family:Arial,sans-serif">${i + 1}</td>
+                        <td style="padding-left:10px;font-size:18px;font-weight:700;color:#2C2A25;font-family:Georgia,serif">${a.icon} ${a.name}</td>
+                      </tr>
+                    </table>
+                  </td>
+                  <td align="right" valign="middle">
+                    <span style="display:inline-block;background:#fff;border:1.5px solid ${color};border-radius:20px;padding:3px 10px;font-size:12px;font-weight:700;color:${color}">${v}/5 · ${getLevelLabel(v)}</span>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <!-- Acción concreta -->
+          <tr>
+            <td style="padding:0 20px 16px">
+              <table width="100%" cellpadding="0" cellspacing="0" style="background:#fff;border-left:3px solid ${color};border-radius:0 10px 10px 0">
+                <tr>
+                  <td style="padding:12px 14px">
+                    <p style="margin:0 0 5px;font-size:10px;font-weight:700;color:${color};letter-spacing:.7px;text-transform:uppercase">Tu acción para esta semana</p>
+                    <p style="margin:0;font-size:14px;color:#2C2A25;line-height:1.6">${tip}</p>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
       </td></tr>`;
   }).join("");
 
-  const fortBlocks = fortalezas.length > 0 ? fortalezas.map(a => {
+  // Bloques de fortalezas
+  const fortBlocks = fortalezas.map(a => {
     const v = scores[a.id] || 0;
+    const color = getColor(v);
+    const label = v === 5 ? "Fortaleza" : "Buen camino";
     return `
-      <tr><td style="padding-bottom:10px">
-        <div style="background:#F0F8F2;border:1.5px solid #C8E6D4;border-radius:12px;padding:14px 18px">
-          <table width="100%" cellpadding="0" cellspacing="0">
-            <tr>
-              <td style="font-size:15px;font-weight:600;color:#2C2A25">${a.icon} ${a.name}</td>
-              <td align="right" style="font-size:13px;font-weight:700;color:#3D9060">${v}/5 — Fortaleza</td>
-            </tr>
-          </table>
-        </div>
+      <tr><td style="padding-bottom:8px">
+        <table width="100%" cellpadding="0" cellspacing="0" style="background:#F3FAF6;border:1.5px solid #C8E6D4;border-radius:12px">
+          <tr>
+            <td style="padding:12px 16px;font-size:15px;color:#2C2A25;font-weight:600">${a.icon} ${a.name}</td>
+            <td align="right" style="padding:12px 16px">
+              <span style="font-size:12px;font-weight:700;color:${color}">${v}/5 · ${label}</span>
+            </td>
+          </tr>
+        </table>
       </td></tr>`;
-  }).join("") : "";
+  }).join("");
 
   return `<!DOCTYPE html>
 <html lang="es">
-<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"></head>
-<body style="margin:0;padding:0;background:#FAF9F6;font-family:'Helvetica Neue',Arial,sans-serif;color:#2C2A25">
-<table width="100%" cellpadding="0" cellspacing="0" style="background:#FAF9F6;padding:32px 16px">
-  <tr><td align="center">
-    <table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <meta name="color-scheme" content="light">
+</head>
+<body style="margin:0;padding:0;background:#FAF9F6;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Helvetica Neue',Arial,sans-serif;color:#2C2A25;-webkit-font-smoothing:antialiased">
 
-      <!-- Header -->
-      <tr><td style="background:linear-gradient(135deg,#3D9060 0%,#2D7048 100%);border-radius:18px 18px 0 0;padding:36px 32px 32px;text-align:center">
-        <p style="margin:0 0 8px;font-size:13px;color:rgba(255,255,255,0.7);letter-spacing:.8px;text-transform:uppercase">Mente Viva · Quiz Bienestar Interior</p>
-        <h1 style="margin:0;font-size:28px;font-weight:700;color:#fff;font-family:Georgia,serif;line-height:1.3">Tu Mapa de Bienestar Interior 🌿</h1>
-        <p style="margin:12px 0 0;font-size:15px;color:rgba(255,255,255,0.85)">Hola ${nombrePrimero}, gracias por completar tu evaluación</p>
-      </td></tr>
+<table width="100%" cellpadding="0" cellspacing="0" style="background:#FAF9F6;padding:24px 12px 48px">
+<tr><td align="center">
+<table width="100%" cellpadding="0" cellspacing="0" style="max-width:580px">
 
-      <!-- Score general -->
-      <tr><td style="background:#fff;border-left:1.5px solid #EBE8E2;border-right:1.5px solid #EBE8E2;padding:28px 32px 24px;text-align:center">
-        <p style="margin:0 0 12px;font-size:13px;color:#9B9590;letter-spacing:.5px;text-transform:uppercase">Tu puntaje general de bienestar</p>
-        <div style="display:inline-block;background:#F0F8F2;border:3px solid #C8E6D4;border-radius:50%;width:80px;height:80px;line-height:80px;text-align:center;margin-bottom:14px">
-          <span style="font-size:28px;font-weight:700;color:${promedioColor}">${promedio}</span><span style="font-size:13px;color:#9B9590">/5</span>
-        </div>
-        <p style="margin:0;font-size:15px;color:#5A5650;line-height:1.6;max-width:400px;margin:0 auto">${promedioMsg}</p>
-      </td></tr>
+  <!-- ░░ HEADER ░░ -->
+  <tr><td style="background:#2C2A25;border-radius:18px 18px 0 0;padding:36px 32px 30px;text-align:center">
+    <p style="margin:0 0 10px;font-size:12px;color:rgba(255,255,255,0.45);letter-spacing:1.2px;text-transform:uppercase;font-weight:600">Mente Viva · Bienestar Interior</p>
+    <h1 style="margin:0;font-size:30px;font-weight:700;color:#fff;font-family:Georgia,'Times New Roman',serif;line-height:1.25">Tu Mapa de<br>Bienestar Interior 🌿</h1>
+    <p style="margin:16px 0 0;font-size:15px;color:rgba(255,255,255,0.7);line-height:1.5">Hola <strong style="color:#fff">${nombrePrimero}</strong> — completaste tu evaluación.</p>
+  </td></tr>
 
-      <!-- Divisor -->
-      <tr><td style="background:#fff;border-left:1.5px solid #EBE8E2;border-right:1.5px solid #EBE8E2;padding:0 32px">
-        <div style="border-top:1.5px solid #EBE8E2"></div>
-      </td></tr>
+  <!-- ░░ APERTURA ░░ -->
+  <tr><td style="background:#fff;border-left:1.5px solid #EBE8E2;border-right:1.5px solid #EBE8E2;padding:28px 32px 24px">
+    <p style="margin:0;font-size:16px;color:#2C2A25;line-height:1.7">${apertura}</p>
+    <p style="margin:14px 0 0;font-size:15px;color:#5A5650;line-height:1.7">
+      Acá abajo encontrás tu mapa completo: dónde estás parada hoy, qué áreas necesitan más atención y una acción concreta para empezar esta semana.
+    </p>
+    <p style="margin:14px 0 0;font-size:13px;color:#9B9590;font-style:italic">
+      Recordá: todo lo que necesitás ya está dentro tuyo. Este mapa solo te ayuda a verlo más claro.
+    </p>
+  </td></tr>
 
-      <!-- Áreas prioritarias -->
-      <tr><td style="background:#fff;border-left:1.5px solid #EBE8E2;border-right:1.5px solid #EBE8E2;padding:24px 32px 8px">
-        <p style="margin:0 0 6px;font-size:13px;color:#9B9590;letter-spacing:.5px;text-transform:uppercase">Tus áreas prioritarias</p>
-        <p style="margin:0 0 20px;font-size:20px;font-weight:700;color:#2C2A25;font-family:Georgia,serif">🎯 Donde vamos a enfocarnos juntas</p>
-        <table width="100%" cellpadding="0" cellspacing="0">${prioBlocks}</table>
-      </td></tr>
+  <!-- ░░ SCORE GENERAL ░░ -->
+  <tr><td style="background:#fff;border-left:1.5px solid #EBE8E2;border-right:1.5px solid #EBE8E2;padding:0 32px 28px">
+    <div style="background:#FAF9F6;border:1.5px solid #EBE8E2;border-radius:16px;padding:22px 24px;text-align:center">
+      <p style="margin:0 0 14px;font-size:12px;color:#9B9590;letter-spacing:.8px;text-transform:uppercase;font-weight:600">Tu puntaje general</p>
+      <table cellpadding="0" cellspacing="0" style="margin:0 auto 16px">
+        <tr>
+          <td style="background:#fff;border:2.5px solid ${promedioColor};border-radius:50%;width:72px;height:72px;text-align:center;vertical-align:middle">
+            <span style="font-size:26px;font-weight:800;color:${promedioColor};font-family:Georgia,serif">${promedio}</span>
+            <span style="font-size:12px;color:#9B9590;display:block;margin-top:-4px">/5</span>
+          </td>
+        </tr>
+      </table>
+      <p style="margin:0;font-size:14px;color:#5A5650;line-height:1.65;max-width:380px;display:block;margin:0 auto">${apertura}</p>
+    </div>
+  </td></tr>
 
-      ${fortalezas.length > 0 ? `
-      <!-- Divisor -->
-      <tr><td style="background:#fff;border-left:1.5px solid #EBE8E2;border-right:1.5px solid #EBE8E2;padding:0 32px">
-        <div style="border-top:1.5px solid #EBE8E2"></div>
-      </td></tr>
+  <!-- ░░ DIVISOR ░░ -->
+  <tr><td style="background:#fff;border-left:1.5px solid #EBE8E2;border-right:1.5px solid #EBE8E2;padding:0 32px">
+    <div style="border-top:1.5px solid #F0EDE7"></div>
+  </td></tr>
 
-      <!-- Fortalezas -->
-      <tr><td style="background:#fff;border-left:1.5px solid #EBE8E2;border-right:1.5px solid #EBE8E2;padding:24px 32px 8px">
-        <p style="margin:0 0 6px;font-size:13px;color:#9B9590;letter-spacing:.5px;text-transform:uppercase">Tus fortalezas</p>
-        <p style="margin:0 0 20px;font-size:20px;font-weight:700;color:#2C2A25;font-family:Georgia,serif">✨ Lo que ya estás construyendo bien</p>
-        <table width="100%" cellpadding="0" cellspacing="0">${fortBlocks}</table>
-      </td></tr>` : ""}
+  <!-- ░░ ÁREAS PRIORITARIAS ░░ -->
+  <tr><td style="background:#fff;border-left:1.5px solid #EBE8E2;border-right:1.5px solid #EBE8E2;padding:28px 32px 12px">
+    <p style="margin:0 0 4px;font-size:11px;color:#9B9590;letter-spacing:1px;text-transform:uppercase;font-weight:700">Por dónde empezar</p>
+    <h2 style="margin:0 0 6px;font-size:22px;font-weight:700;color:#2C2A25;font-family:Georgia,serif">Tus 3 áreas prioritarias</h2>
+    <p style="margin:0 0 22px;font-size:14px;color:#5A5650;line-height:1.6">Cada una viene con una acción concreta. Una cosa a la vez.</p>
+    <table width="100%" cellpadding="0" cellspacing="0">${prioBlocks}</table>
+  </td></tr>
 
-      <!-- Mensaje de cierre -->
-      <tr><td style="background:#fff;border-left:1.5px solid #EBE8E2;border-right:1.5px solid #EBE8E2;padding:8px 32px 28px">
-        <div style="background:linear-gradient(135deg,#F5FBF7 0%,#EEF8F2 100%);border:1.5px solid #C8E6D4;border-radius:14px;padding:20px 24px">
-          <p style="margin:0 0 10px;font-size:15px;color:#2C2A25;line-height:1.6">
-            Estos resultados son el punto de partida de nuestro trabajo juntas. En cada sesión vamos a ir trabajando estas áreas con estrategias concretas, personalizadas y sostenibles para vos.
-          </p>
-          <p style="margin:0;font-size:15px;color:#2C2A25;line-height:1.6">
-            Si tenés alguna pregunta o querés contarme algo sobre tus respuestas, respondé este email. Estoy aquí.
-          </p>
-        </div>
-      </td></tr>
+  ${fortalezas.length > 0 ? `
+  <!-- ░░ DIVISOR ░░ -->
+  <tr><td style="background:#fff;border-left:1.5px solid #EBE8E2;border-right:1.5px solid #EBE8E2;padding:0 32px">
+    <div style="border-top:1.5px solid #F0EDE7"></div>
+  </td></tr>
 
-      <!-- Firma -->
-      <tr><td style="background:#fff;border:1.5px solid #EBE8E2;border-radius:0 0 18px 18px;padding:24px 32px;text-align:center">
-        <p style="margin:0;font-size:15px;color:#5A5650">Con cariño,</p>
-        <p style="margin:6px 0 0;font-size:18px;font-weight:700;color:#2C2A25;font-family:Georgia,serif">Dani Navarro</p>
-        <p style="margin:4px 0 0;font-size:13px;color:#3D9060;font-weight:600;letter-spacing:.3px">Mente Viva</p>
-        <p style="margin:4px 0 0;font-size:12px;color:#9B9590">hola@daninavarro.com.ar</p>
-      </td></tr>
+  <!-- ░░ FORTALEZAS ░░ -->
+  <tr><td style="background:#fff;border-left:1.5px solid #EBE8E2;border-right:1.5px solid #EBE8E2;padding:28px 32px 20px">
+    <p style="margin:0 0 4px;font-size:11px;color:#3D9060;letter-spacing:1px;text-transform:uppercase;font-weight:700">Lo que ya funciona</p>
+    <h2 style="margin:0 0 6px;font-size:22px;font-weight:700;color:#2C2A25;font-family:Georgia,serif">✨ Tus fortalezas</h2>
+    <p style="margin:0 0 18px;font-size:14px;color:#5A5650;line-height:1.6">Estas áreas son tu base. No las abandones.</p>
+    <table width="100%" cellpadding="0" cellspacing="0">${fortBlocks}</table>
+  </td></tr>` : ""}
 
+  <!-- ░░ CIERRE ░░ -->
+  <tr><td style="background:#fff;border-left:1.5px solid #EBE8E2;border-right:1.5px solid #EBE8E2;padding:8px 32px 32px">
+    <div style="background:linear-gradient(135deg,#F5FBF7,#EDF7F1);border:1.5px solid #C8E6D4;border-radius:16px;padding:22px 24px">
+      <p style="margin:0 0 12px;font-size:15px;color:#2C2A25;line-height:1.7">${cierre}</p>
+      <p style="margin:0;font-size:15px;color:#2C2A25;line-height:1.7">
+        Si algo de lo que encontraste acá te resuena o querés contarme cómo estás, respondé este email. Leo cada uno personalmente.
+      </p>
+    </div>
+  </td></tr>
+
+  <!-- ░░ FIRMA ░░ -->
+  <tr><td style="background:#fff;border:1.5px solid #EBE8E2;border-radius:0 0 18px 18px;padding:24px 32px 28px">
+    <table cellpadding="0" cellspacing="0">
+      <tr>
+        <td style="padding-right:16px;border-right:2px solid #EBE8E2">
+          <p style="margin:0;font-size:14px;color:#9B9590;line-height:1.3">Con cariño,</p>
+          <p style="margin:4px 0 0;font-size:20px;font-weight:700;color:#2C2A25;font-family:Georgia,serif">Dani</p>
+          <p style="margin:2px 0 0;font-size:12px;color:#3D9060;font-weight:600;letter-spacing:.3px">Mente Viva</p>
+        </td>
+        <td style="padding-left:16px">
+          <p style="margin:0;font-size:13px;color:#9B9590;line-height:1.8">hola@daninavarro.com.ar</p>
+          <p style="margin:0;font-size:11px;color:#C0BDB8">Si no querés recibir más emails,<br>respondé "darme de baja".</p>
+        </td>
+      </tr>
     </table>
   </td></tr>
+
+  <!-- ░░ ESPACIO FINAL ░░ -->
+  <tr><td style="height:24px"></td></tr>
+
 </table>
+</td></tr>
+</table>
+
 </body></html>`;
 }
 

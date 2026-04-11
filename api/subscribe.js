@@ -276,7 +276,7 @@ function buildEmailDani(nombre, email, scores, promedio) {
 </body></html>`;
 }
 
-// ─── EMAIL 2: Para la persona que completó el quiz ───────────────────────────
+// ─── EMAIL 2: Bienvenida + resumen del quiz ───────────────────────────────────
 function buildEmailPaciente(nombre, scores, promedio) {
   const nombrePrimero = nombre.split(" ")[0];
   const sorted = [...AREAS].sort((a, b) => (scores[a.id] || 0) - (scores[b.id] || 0));
@@ -287,63 +287,52 @@ function buildEmailPaciente(nombre, scores, promedio) {
   const promedioNum = parseFloat(promedio);
   const promedioColor = getColor(Math.round(promedioNum));
 
-  // Apertura personalizada según puntaje
-  const apertura = promedioNum <= 2
-    ? `Hacer este quiz requiere honestidad. Y eso, ${nombrePrimero}, ya dice mucho de vos.`
+  // Mensaje debajo del score según nivel
+  const scoreMensaje = promedioNum <= 2
+    ? "Hay mucho por construir. Y el hecho de que estés acá ya es el primer paso real."
     : promedioNum <= 3
-    ? `Completar este quiz es el primer gesto real de cuidado hacia vos misma. Me alegra que estés acá.`
+    ? "Hay áreas que piden atención. Con foco y micro-acciones concretas, todo puede cambiar."
     : promedioNum <= 4
-    ? `Tenés más bases de las que creés. Este mapa te va a ayudar a ver exactamente dónde enfocar la energía.`
-    : `Tu mapa de bienestar muestra una base muy sólida. Lo que viene ahora es seguir afinando.`;
-
-  const cierre = promedioNum <= 2
-    ? `En los próximos días te voy a ir mandando micro-acciones para cada una de tus áreas prioritarias. Una por una. Sin abrumar. Porque el cambio real se construye de a poco, con constancia.`
-    : promedioNum <= 3
-    ? `En los próximos días te comparto micro-acciones concretas para empezar a mover las agujas en tus áreas clave. Cosas que podés hacer hoy, con lo que tenés.`
-    : `En los próximos días te mando tips específicos para potenciar todavía más tu bienestar. Pequeños ajustes que generan un impacto real.`;
+    ? "Tenés bases sólidas. Con algunos ajustes clave, podés llegar a otro nivel de bienestar."
+    : "Tu nivel de bienestar es muy bueno. Vamos a afinarlo todavía más juntas.";
 
   // Bloques de áreas prioritarias
+  const numColors  = ["#C75B4A", "#D4895A", "#D4A84A"];
+  const numBgColors = ["#FEF2F0", "#FFF5EE", "#FFF9EC"];
+  const cardBgColors = ["#FFFAF9", "#FFFBF7", "#FAFAF7"];
+  const cardBorders  = ["#F5C5BC", "#F5DEC5", "#E8E4DC"];
+
   const prioBlocks = prioritarias.map((a, i) => {
-    const v = scores[a.id] || 0;
+    const v     = scores[a.id] || 0;
     const color = getColor(v);
-    const tip = getTip(a.id, v);
-    const numColors = ["#C75B4A", "#D4895A", "#D4A84A"];
-    const numBg = ["#FEF2F0", "#FFF5EE", "#FFF9EC"];
-    const cardBg = i === 0 ? "#FFFAF9" : i === 1 ? "#FFFBF7" : "#FAFAF7";
-    const borderColor = i === 0 ? "#F5C5BC" : i === 1 ? "#F5DEC5" : "#E8E4DC";
+    const tip   = getTip(a.id, v);
     return `
-      <tr><td style="padding-bottom:14px">
-        <table width="100%" cellpadding="0" cellspacing="0" style="background:${cardBg};border:1.5px solid ${borderColor};border-radius:16px;overflow:hidden">
-          <!-- Cabecera del área -->
+      <tr><td style="padding-bottom:12px">
+        <table width="100%" cellpadding="0" cellspacing="0" style="background:${cardBgColors[i]};border:1.5px solid ${cardBorders[i]};border-radius:14px">
           <tr>
-            <td style="padding:16px 20px 12px">
+            <td style="padding:16px 20px 10px">
               <table width="100%" cellpadding="0" cellspacing="0">
                 <tr>
                   <td valign="middle">
-                    <table cellpadding="0" cellspacing="0">
-                      <tr>
-                        <td style="background:${numBg[i]};border-radius:50%;width:24px;height:24px;text-align:center;line-height:24px;font-size:11px;font-weight:800;color:${numColors[i]};font-family:Arial,sans-serif">${i + 1}</td>
-                        <td style="padding-left:10px;font-size:18px;font-weight:700;color:#2C2A25;font-family:Georgia,serif">${a.icon} ${a.name}</td>
-                      </tr>
-                    </table>
+                    <table cellpadding="0" cellspacing="0"><tr>
+                      <td style="background:${numBgColors[i]};border-radius:50%;width:22px;height:22px;text-align:center;line-height:22px;font-size:11px;font-weight:800;color:${numColors[i]};font-family:Arial,sans-serif">${i + 1}</td>
+                      <td style="padding-left:9px;font-size:17px;font-weight:700;color:#2C2A25;font-family:Georgia,serif">${a.icon} ${a.name}</td>
+                    </tr></table>
                   </td>
                   <td align="right" valign="middle">
-                    <span style="display:inline-block;background:#fff;border:1.5px solid ${color};border-radius:20px;padding:3px 10px;font-size:12px;font-weight:700;color:${color}">${v}/5 · ${getLevelLabel(v)}</span>
+                    <span style="display:inline-block;background:#fff;border:1.5px solid ${color};border-radius:20px;padding:3px 10px;font-size:12px;font-weight:700;color:${color}">${v}/5</span>
                   </td>
                 </tr>
               </table>
             </td>
           </tr>
-          <!-- Acción concreta -->
           <tr>
             <td style="padding:0 20px 16px">
               <table width="100%" cellpadding="0" cellspacing="0" style="background:#fff;border-left:3px solid ${color};border-radius:0 10px 10px 0">
-                <tr>
-                  <td style="padding:12px 14px">
-                    <p style="margin:0 0 5px;font-size:10px;font-weight:700;color:${color};letter-spacing:.7px;text-transform:uppercase">Tu acción para esta semana</p>
-                    <p style="margin:0;font-size:14px;color:#2C2A25;line-height:1.6">${tip}</p>
-                  </td>
-                </tr>
+                <tr><td style="padding:11px 14px">
+                  <p style="margin:0 0 4px;font-size:10px;font-weight:700;color:${color};letter-spacing:.7px;text-transform:uppercase">Tu acción para esta semana</p>
+                  <p style="margin:0;font-size:14px;color:#2C2A25;line-height:1.6">${tip}</p>
+                </td></tr>
               </table>
             </td>
           </tr>
@@ -353,15 +342,15 @@ function buildEmailPaciente(nombre, scores, promedio) {
 
   // Bloques de fortalezas
   const fortBlocks = fortalezas.map(a => {
-    const v = scores[a.id] || 0;
+    const v     = scores[a.id] || 0;
     const color = getColor(v);
     const label = v === 5 ? "Fortaleza" : "Buen camino";
     return `
       <tr><td style="padding-bottom:8px">
         <table width="100%" cellpadding="0" cellspacing="0" style="background:#F3FAF6;border:1.5px solid #C8E6D4;border-radius:12px">
           <tr>
-            <td style="padding:12px 16px;font-size:15px;color:#2C2A25;font-weight:600">${a.icon} ${a.name}</td>
-            <td align="right" style="padding:12px 16px">
+            <td style="padding:12px 16px;font-size:14px;font-weight:600;color:#2C2A25">${a.icon} ${a.name}</td>
+            <td align="right" style="padding:12px 16px;white-space:nowrap">
               <span style="font-size:12px;font-weight:700;color:${color}">${v}/5 · ${label}</span>
             </td>
           </tr>
@@ -383,37 +372,37 @@ function buildEmailPaciente(nombre, scores, promedio) {
 <table width="100%" cellpadding="0" cellspacing="0" style="max-width:580px">
 
   <!-- ░░ HEADER ░░ -->
-  <tr><td style="background:#2C2A25;border-radius:18px 18px 0 0;padding:36px 32px 30px;text-align:center">
-    <p style="margin:0 0 10px;font-size:12px;color:rgba(255,255,255,0.45);letter-spacing:1.2px;text-transform:uppercase;font-weight:600">Mente Viva · Bienestar Interior</p>
-    <h1 style="margin:0;font-size:30px;font-weight:700;color:#fff;font-family:Georgia,'Times New Roman',serif;line-height:1.25">Tu Mapa de<br>Bienestar Interior 🌿</h1>
-    <p style="margin:16px 0 0;font-size:15px;color:rgba(255,255,255,0.7);line-height:1.5">Hola <strong style="color:#fff">${nombrePrimero}</strong> — completaste tu evaluación.</p>
+  <tr><td style="background:#3D9060;border-radius:18px 18px 0 0;padding:36px 32px 32px;text-align:center">
+    <p style="margin:0 0 10px;font-size:11px;color:rgba(255,255,255,0.6);letter-spacing:1.4px;text-transform:uppercase;font-weight:600">Mente Viva · Bienestar Interior</p>
+    <h1 style="margin:0;font-size:28px;font-weight:700;color:#fff;font-family:Georgia,'Times New Roman',serif;line-height:1.3">Tu Mapa de Bienestar Interior 🌿</h1>
   </td></tr>
 
   <!-- ░░ APERTURA ░░ -->
-  <tr><td style="background:#fff;border-left:1.5px solid #EBE8E2;border-right:1.5px solid #EBE8E2;padding:28px 32px 24px">
-    <p style="margin:0;font-size:16px;color:#2C2A25;line-height:1.7">${apertura}</p>
-    <p style="margin:14px 0 0;font-size:15px;color:#5A5650;line-height:1.7">
-      Acá abajo encontrás tu mapa completo: dónde estás parada hoy, qué áreas necesitan más atención y una acción concreta para empezar esta semana.
+  <tr><td style="background:#fff;border-left:1.5px solid #EBE8E2;border-right:1.5px solid #EBE8E2;padding:30px 32px 26px">
+    <p style="margin:0 0 10px;font-size:18px;font-weight:700;color:#2C2A25;font-family:Georgia,serif">Hola ${nombrePrimero},</p>
+    <p style="margin:0 0 12px;font-size:16px;font-weight:600;color:#2C2A25;line-height:1.5">Qué bueno que estés acá.</p>
+    <p style="margin:0 0 12px;font-size:15px;color:#5A5650;line-height:1.7">
+      Tomarte 3 minutos para mirarte honestamente ya es un acto de amor propio. Gracias por animarte.
     </p>
-    <p style="margin:14px 0 0;font-size:13px;color:#9B9590;font-style:italic">
-      Recordá: todo lo que necesitás ya está dentro tuyo. Este mapa solo te ayuda a verlo más claro.
+    <p style="margin:0;font-size:15px;color:#5A5650;line-height:1.7">
+      Acá va tu <strong style="color:#2C2A25">Mapa de Bienestar Interior</strong> — un retrato de cómo están hoy las 9 áreas fundamentales de tu vida según la ciencia de longevidad.
     </p>
   </td></tr>
 
   <!-- ░░ SCORE GENERAL ░░ -->
   <tr><td style="background:#fff;border-left:1.5px solid #EBE8E2;border-right:1.5px solid #EBE8E2;padding:0 32px 28px">
-    <div style="background:#FAF9F6;border:1.5px solid #EBE8E2;border-radius:16px;padding:22px 24px;text-align:center">
-      <p style="margin:0 0 14px;font-size:12px;color:#9B9590;letter-spacing:.8px;text-transform:uppercase;font-weight:600">Tu puntaje general</p>
-      <table cellpadding="0" cellspacing="0" style="margin:0 auto 16px">
-        <tr>
-          <td style="background:#fff;border:2.5px solid ${promedioColor};border-radius:50%;width:72px;height:72px;text-align:center;vertical-align:middle">
-            <span style="font-size:26px;font-weight:800;color:${promedioColor};font-family:Georgia,serif">${promedio}</span>
-            <span style="font-size:12px;color:#9B9590;display:block;margin-top:-4px">/5</span>
-          </td>
-        </tr>
-      </table>
-      <p style="margin:0;font-size:14px;color:#5A5650;line-height:1.65;max-width:380px;display:block;margin:0 auto">${apertura}</p>
-    </div>
+    <table width="100%" cellpadding="0" cellspacing="0" style="background:#FAF9F6;border:1.5px solid #EBE8E2;border-radius:14px">
+      <tr><td style="padding:24px;text-align:center">
+        <p style="margin:0 0 16px;font-size:11px;color:#9B9590;letter-spacing:.9px;text-transform:uppercase;font-weight:700">Tu puntaje general de bienestar</p>
+        <table cellpadding="0" cellspacing="0" style="margin:0 auto">
+          <tr><td style="background:#fff;border:3px solid ${promedioColor};border-radius:50%;width:80px;height:80px;text-align:center;vertical-align:middle">
+            <p style="margin:0;font-size:30px;font-weight:800;color:${promedioColor};font-family:Georgia,serif;line-height:1">${promedio}</p>
+            <p style="margin:0;font-size:11px;color:#9B9590;line-height:1.4">/5</p>
+          </td></tr>
+        </table>
+        <p style="margin:16px 0 0;font-size:14px;color:#5A5650;line-height:1.6;max-width:360px;margin:16px auto 0">${scoreMensaje}</p>
+      </td></tr>
+    </table>
   </td></tr>
 
   <!-- ░░ DIVISOR ░░ -->
@@ -422,10 +411,10 @@ function buildEmailPaciente(nombre, scores, promedio) {
   </td></tr>
 
   <!-- ░░ ÁREAS PRIORITARIAS ░░ -->
-  <tr><td style="background:#fff;border-left:1.5px solid #EBE8E2;border-right:1.5px solid #EBE8E2;padding:28px 32px 12px">
+  <tr><td style="background:#fff;border-left:1.5px solid #EBE8E2;border-right:1.5px solid #EBE8E2;padding:28px 32px 16px">
     <p style="margin:0 0 4px;font-size:11px;color:#9B9590;letter-spacing:1px;text-transform:uppercase;font-weight:700">Por dónde empezar</p>
-    <h2 style="margin:0 0 6px;font-size:22px;font-weight:700;color:#2C2A25;font-family:Georgia,serif">Tus 3 áreas prioritarias</h2>
-    <p style="margin:0 0 22px;font-size:14px;color:#5A5650;line-height:1.6">Cada una viene con una acción concreta. Una cosa a la vez.</p>
+    <h2 style="margin:0 0 6px;font-size:21px;font-weight:700;color:#2C2A25;font-family:Georgia,serif">Tus 3 áreas prioritarias</h2>
+    <p style="margin:0 0 20px;font-size:14px;color:#5A5650;line-height:1.6">Cada una viene con una acción concreta. Una cosa a la vez.</p>
     <table width="100%" cellpadding="0" cellspacing="0">${prioBlocks}</table>
   </td></tr>
 
@@ -436,42 +425,45 @@ function buildEmailPaciente(nombre, scores, promedio) {
   </td></tr>
 
   <!-- ░░ FORTALEZAS ░░ -->
-  <tr><td style="background:#fff;border-left:1.5px solid #EBE8E2;border-right:1.5px solid #EBE8E2;padding:28px 32px 20px">
+  <tr><td style="background:#fff;border-left:1.5px solid #EBE8E2;border-right:1.5px solid #EBE8E2;padding:24px 32px 20px">
     <p style="margin:0 0 4px;font-size:11px;color:#3D9060;letter-spacing:1px;text-transform:uppercase;font-weight:700">Lo que ya funciona</p>
-    <h2 style="margin:0 0 6px;font-size:22px;font-weight:700;color:#2C2A25;font-family:Georgia,serif">✨ Tus fortalezas</h2>
-    <p style="margin:0 0 18px;font-size:14px;color:#5A5650;line-height:1.6">Estas áreas son tu base. No las abandones.</p>
+    <h2 style="margin:0 0 6px;font-size:21px;font-weight:700;color:#2C2A25;font-family:Georgia,serif">✨ Tus fortalezas</h2>
+    <p style="margin:0 0 16px;font-size:14px;color:#5A5650;line-height:1.6">Estas áreas son tu base. No las abandones.</p>
     <table width="100%" cellpadding="0" cellspacing="0">${fortBlocks}</table>
   </td></tr>` : ""}
 
   <!-- ░░ CIERRE ░░ -->
-  <tr><td style="background:#fff;border-left:1.5px solid #EBE8E2;border-right:1.5px solid #EBE8E2;padding:8px 32px 32px">
-    <div style="background:linear-gradient(135deg,#F5FBF7,#EDF7F1);border:1.5px solid #C8E6D4;border-radius:16px;padding:22px 24px">
-      <p style="margin:0 0 12px;font-size:15px;color:#2C2A25;line-height:1.7">${cierre}</p>
-      <p style="margin:0;font-size:15px;color:#2C2A25;line-height:1.7">
-        Si algo de lo que encontraste acá te resuena o querés contarme cómo estás, respondé este email. Leo cada uno personalmente.
+  <tr><td style="background:#fff;border-left:1.5px solid #EBE8E2;border-right:1.5px solid #EBE8E2;padding:8px 32px 28px">
+    <div style="background:linear-gradient(135deg,#F5FBF7,#EDF7F1);border:1.5px solid #C8E6D4;border-radius:14px;padding:22px 24px">
+      <p style="margin:0 0 12px;font-size:15px;color:#2C2A25;line-height:1.75">
+        En los próximos 7 días te voy a acompañar con <strong>4 micro-acciones basadas en ciencia</strong>. Pequeñas. Concretas. Imposibles de no hacer.
+      </p>
+      <p style="margin:0 0 12px;font-size:15px;color:#2C2A25;line-height:1.75">
+        Porque el bienestar no se construye con cambios gigantes — se construye con micro-decisiones repetidas en el tiempo.
+      </p>
+      <p style="margin:0;font-size:15px;color:#3D9060;font-weight:600;font-style:italic;line-height:1.6">
+        Recordá: todo lo que necesitás ya está dentro tuyo. Mi trabajo es solo ayudarte a recordarlo.
       </p>
     </div>
   </td></tr>
 
   <!-- ░░ FIRMA ░░ -->
   <tr><td style="background:#fff;border:1.5px solid #EBE8E2;border-radius:0 0 18px 18px;padding:24px 32px 28px">
-    <table cellpadding="0" cellspacing="0">
-      <tr>
-        <td style="padding-right:16px;border-right:2px solid #EBE8E2">
-          <p style="margin:0;font-size:14px;color:#9B9590;line-height:1.3">Con cariño,</p>
-          <p style="margin:4px 0 0;font-size:20px;font-weight:700;color:#2C2A25;font-family:Georgia,serif">Dani</p>
-          <p style="margin:2px 0 0;font-size:12px;color:#3D9060;font-weight:600;letter-spacing:.3px">Mente Viva</p>
-        </td>
-        <td style="padding-left:16px">
-          <p style="margin:0;font-size:13px;color:#9B9590;line-height:1.8">hola@daninavarro.com.ar</p>
-          <p style="margin:0;font-size:11px;color:#C0BDB8">Si no querés recibir más emails,<br>respondé "darme de baja".</p>
-        </td>
-      </tr>
-    </table>
+    <table cellpadding="0" cellspacing="0"><tr>
+      <td style="padding-right:18px;border-right:2px solid #EBE8E2">
+        <p style="margin:0;font-size:13px;color:#9B9590">Con cariño,</p>
+        <p style="margin:4px 0 2px;font-size:20px;font-weight:700;color:#2C2A25;font-family:Georgia,serif">Dani</p>
+        <p style="margin:0;font-size:12px;color:#3D9060;font-weight:600;letter-spacing:.3px">Mente Viva</p>
+      </td>
+      <td style="padding-left:18px">
+        <p style="margin:0 0 4px;font-size:13px;color:#9B9590">hola@daninavarro.com.ar</p>
+        <p style="margin:0;font-size:11px;color:#C0BDB8;line-height:1.5">Si no querés recibir más emails,<br>respondé "darme de baja".</p>
+      </td>
+    </tr></table>
   </td></tr>
 
   <!-- ░░ ESPACIO FINAL ░░ -->
-  <tr><td style="height:24px"></td></tr>
+  <tr><td style="height:28px"></td></tr>
 
 </table>
 </td></tr>

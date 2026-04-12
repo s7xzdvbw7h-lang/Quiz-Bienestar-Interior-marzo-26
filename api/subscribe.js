@@ -472,23 +472,82 @@ function buildEmailPaciente(nombre, scores, promedio) {
 </body></html>`;
 }
 
+// ─── Helper: enviar email transaccional via MailerSend ───────────────────────
+// MailerLite (connect.mailerlite.com) es para email marketing (campañas, grupos).
+// Para emails transaccionales 1-a-1 se usa MailerSend (api.mailersend.com),
+// el producto hermano de Tipe/MailerLite. Requiere MAILERSEND_API_KEY separada.
+async function sendEmail(to, toName, subject, html) {
+  const MS_KEY = process.env.MAILERSEND_API_KEY;
+
+  if (!MS_KEY) {
+    console.error("[EMAIL] ❌ MAILERSEND_API_KEY no está configurada en las variables de entorno");
+    return { ok: false, error: "MAILERSEND_API_KEY missing" };
+  }
+
+  console.log(`[EMAIL] 📤 Intentando enviar email a: ${to} | Asunto: ${subject}`);
+
+  const payload = {
+    from: { email: "hola@daninavarro.com.ar", name: "Dani · Mente Viva" },
+    to: [{ email: to, name: toName || to }],
+    subject,
+    html,
+  };
+
+  let res;
+  try {
+    res = await fetch("https://api.mailersend.com/v1/email", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${MS_KEY}`,
+      },
+      body: JSON.stringify(payload),
+    });
+  } catch (networkErr) {
+    console.error("[EMAIL] ❌ Error de red al llamar a MailerSend:", networkErr.message);
+    return { ok: false, error: networkErr.message };
+  }
+
+  // MailerSend devuelve 202 Accepted en éxito (sin body)
+  if (res.status === 202) {
+    console.log(`[EMAIL] ✅ Email enviado correctamente a ${to} (202 Accepted)`);
+    return { ok: true };
+  }
+
+  // Cualquier otro status es error — loguear el body completo
+  let body = "";
+  try { body = await res.text(); } catch (_) {}
+  console.error(`[EMAIL] ❌ MailerSend respondió ${res.status} para ${to}:`, body);
+  return { ok: false, status: res.status, body };
+}
+
 // ─── Handler principal ────────────────────────────────────────────────────────
 export default async function handler(req, res) {
+  console.log("[SUBSCRIBE] 🔔 Nueva request:", req.method);
+
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Method not allowed" });
   }
 
   const API_KEY = process.env.MAILERLITE_API_KEY;
   if (!API_KEY) {
+    console.error("[SUBSCRIBE] ❌ MAILERLITE_API_KEY no configurada");
     return res.status(500).json({ error: "API key not configured" });
   }
 
+  console.log("[SUBSCRIBE] ✅ MAILERLITE_API_KEY presente");
+  console.log("[SUBSCRIBE] ✅ MAILERSEND_API_KEY presente:", !!process.env.MAILERSEND_API_KEY);
+
   const { email, name, group_id, fields } = req.body;
   if (!email) {
+    console.error("[SUBSCRIBE] ❌ Email no recibido en el body");
     return res.status(400).json({ error: "Email is required" });
   }
 
+  console.log(`[SUBSCRIBE] 📥 Datos recibidos — email: ${email} | nombre: ${name} | referencia: ${fields?.referencia || "(ninguna)"}`);
+
   // 1. Crear/actualizar subscriber en MailerLite
+  console.log("[SUBSCRIBE] 📝 Creando subscriber en MailerLite...");
   try {
     const body = {
       email,
@@ -506,14 +565,19 @@ export default async function handler(req, res) {
     });
 
     const mlData = await mlRes.json();
+
     if (!mlRes.ok) {
+      console.error(`[SUBSCRIBE] ❌ MailerLite respondió ${mlRes.status}:`, JSON.stringify(mlData));
       return res.status(mlRes.status).json(mlData);
     }
+
+    console.log(`[SUBSCRIBE] ✅ Subscriber creado/actualizado en MailerLite (${mlRes.status})`);
   } catch (err) {
+    console.error("[SUBSCRIBE] ❌ Error de red con MailerLite:", err.message);
     return res.status(500).json({ error: "Error creando subscriber" });
   }
 
-  // 2. Calcular scores para los emails
+  // 2. Calcular scores
   const scores = {};
   for (const a of AREAS) {
     scores[a.id] = parseFloat(fields?.[`quiz_${a.id}`]) || 0;
@@ -522,44 +586,32 @@ export default async function handler(req, res) {
     ? parseFloat(fields.quiz_promedio).toFixed(1)
     : (Object.values(scores).reduce((s, v) => s + v, 0) / AREAS.length).toFixed(1);
 
-  const mlHeaders = {
-    "Content-Type": "application/json",
-    Authorization: `Bearer ${API_KEY}`,
-  };
+  console.log(`[SUBSCRIBE] 📊 Scores calculados — promedio: ${promedio}`);
 
-  // Email a la paciente — SIEMPRE
-  try {
-    await fetch("https://connect.mailerlite.com/api/emails", {
-      method: "POST",
-      headers: mlHeaders,
-      body: JSON.stringify({
-        from: { email: "hola@daninavarro.com.ar", name: "Dani Navarro · Mente Viva" },
-        to: [{ email, name }],
-        subject: "Tu Mapa de Bienestar Interior 🌿",
-        html: buildEmailPaciente(name, scores, promedio),
-      }),
-    });
-  } catch (err) {
-    console.error("Error enviando email a paciente:", err);
-  }
+  // 3. Email de bienvenida a quien completó el quiz — SIEMPRE
+  console.log("[SUBSCRIBE] 📨 Enviando email de bienvenida al usuario...");
+  const resultPaciente = await sendEmail(
+    email,
+    name,
+    "Qué bueno que estés acá 🌿 Tu Mapa de Bienestar",
+    buildEmailPaciente(name, scores, promedio)
+  );
+  console.log("[SUBSCRIBE] Resultado email usuario:", JSON.stringify(resultPaciente));
 
-  // Email a Dani — solo si referencia === "paciente"
+  // 4. Notificación interna a Dani — solo si referencia === "paciente"
   if (fields?.referencia === "paciente") {
-    try {
-      await fetch("https://connect.mailerlite.com/api/emails", {
-        method: "POST",
-        headers: mlHeaders,
-        body: JSON.stringify({
-          from: { email: "hola@daninavarro.com.ar", name: "Mente Viva · Quiz" },
-          to: [{ email: "hola@daninavarro.com.ar" }],
-          subject: `🔔 Nueva paciente completó el Quiz: ${name}`,
-          html: buildEmailDani(name, email, scores, promedio),
-        }),
-      });
-    } catch (err) {
-      console.error("Error enviando email a Dani:", err);
-    }
+    console.log("[SUBSCRIBE] 📨 Referencia=paciente → enviando notificación a Dani...");
+    const resultDani = await sendEmail(
+      "hola@daninavarro.com.ar",
+      "Dani Navarro",
+      `🔔 Nueva paciente completó el Quiz: ${name}`,
+      buildEmailDani(name, email, scores, promedio)
+    );
+    console.log("[SUBSCRIBE] Resultado email Dani:", JSON.stringify(resultDani));
+  } else {
+    console.log("[SUBSCRIBE] ℹ️ Referencia no es 'paciente' → no se envía notificación interna");
   }
 
+  console.log("[SUBSCRIBE] ✅ Handler finalizado correctamente");
   return res.status(200).json({ success: true });
 }

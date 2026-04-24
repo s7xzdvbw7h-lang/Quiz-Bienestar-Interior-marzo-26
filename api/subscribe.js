@@ -208,7 +208,7 @@ export default async function handler(req, res) {
     console.error('MailerLite fetch error:', mlErr);
   }
 
-  // --- 2. MailerSend: send rich results email ---
+  // --- 2. MailerSend: send rich results email (non-fatal) ---
   try {
     const htmlBody = buildEmailHtml(name || '', scores, avgScore);
     const textBody = `Hola ${name || ''}!\n\nTu puntaje general: ${avgScore}/5\n\n${getMotivationalMsg(parseFloat(avgScore))}\n\nResultados:\n${AREAS.map(a => `${a.name}: ${scores[a.id] || 0}/5`).join('\n')}\n\nCon cariño,\nDani Navarro`;
@@ -231,11 +231,13 @@ export default async function handler(req, res) {
     if (!msRes.ok) {
       const msBody = await msRes.text();
       console.error('MailerSend error:', msRes.status, msBody);
-      return res.status(msRes.status).json({ error: msBody });
+      // Non-fatal: MailerLite automation handles the email sequence
+    } else {
+      console.log('MailerSend OK: results email sent to', email);
     }
   } catch (msErr) {
-    console.error('MailerSend fetch error:', msErr);
-    return res.status(500).json({ error: 'Internal server error' });
+    console.error('MailerSend fetch error:', msErr.message);
+    // Non-fatal: continue anyway
   }
 
   return res.status(200).json({ success: true });

@@ -1,28 +1,5 @@
-const AREAS = [
-  { id: "sueno",         name: "Sueño Reparador",             icon: "🌙" },
-  { id: "alimentacion",  name: "Alimentación Consciente",     icon: "🥗" },
-  { id: "movimiento",    name: "Movimiento Diario",           icon: "🏃" },
-  { id: "estres",        name: "Gestión del Estrés",          icon: "🧘‍♀️" },
-  { id: "emocional",     name: "Salud Emocional",             icon: "💜" },
-  { id: "naturaleza",    name: "Conexión con la Naturaleza",  icon: "🌿" },
-  { id: "vinculos",      name: "Vínculos y Propósito",        icon: "🤝" },
-  { id: "suplementacion",name: "Suplementación Inteligente",  icon: "💊" },
-  { id: "digital",       name: "Higiene Digital",             icon: "📱" },
-];
+import { AREAS, TIPS, LABELS } from "../shared/content.js";
 
-const TIPS = {
-  sueno:         ["Elegí una hora fija para acostarte y mantenela toda la semana — incluyendo fines de semana. La consistencia importa más que la cantidad.","Creá una rutina pre-sueño: 60 min antes empezá a bajar luces y dejá el celular fuera del cuarto.","Sumá el 'protocolo de luz': exponete a sol natural en los primeros 30 min del día para sincronizar tu reloj biológico.","Optimizá tu ambiente: cuarto oscuro, temperatura 18-20°C, sin pantallas en la habitación.","Experimentá con un diario de sueño para identificar qué hábitos mejoran tu descanso y cuáles lo sabotean."],
-  alimentacion:  ["Sumá una porción de vegetales verdes a una comida por día. Un solo cambio sostenido ya genera impacto real.","Reemplazá un ultraprocesado por día con comida real: fruta, frutos secos, huevo o legumbres.","Probá definir una ventana de alimentación de 12hs (ej: desayunás a las 8 → cenás antes de las 20).","Sumá más proteína de calidad y grasas saludables: palta, aceite de oliva, frutos secos.","Seguí escuchando a tu cuerpo. Podés experimentar con nuevos alimentos o recetas que te nutran más."],
-  movimiento:    ["Empezá caminando 15 min al día. Es la intervención con mejor relación esfuerzo-resultado según la evidencia.","Sumá una actividad que disfrutes 2 veces por semana. No tiene que ser el gym: bailar, nadar o bici cuentan.","Incorporá algo de fuerza: sentadillas, flexiones o bandas elásticas. Tu masa muscular es clave para la longevidad.","Agregá 10 min de movilidad y estiramientos post-entreno. Previene lesiones y mejora la recuperación.","Desafiate: ¿podés subir 4 pisos sin agitarte? ¿Levantarte del piso sin manos? Tests funcionales reales."],
-  estres:        ["Probá la respiración 4-7-8 (inhalar 4s, retener 7s, exhalar 8s) tres veces antes de cada comida. Son 60 segundos.","Elegí UNA práctica de regulación y dedicale 5 min diarios: respiración, journaling o caminata sin celular.","Identificá tus 3 mayores fuentes de estrés y anotá una pequeña acción para cada una esta semana.","Sumá prácticas de recuperación activa: tiempo en naturaleza, meditación guiada o contacto con agua fría.","Compartí lo que aprendiste. Enseñar una técnica consolida el hábito y multiplica el impacto."],
-  emocional:     ["Empezá un mini-diario emocional: 3 min al día escribiendo qué sentiste y qué lo disparó.","Practicá nombrar tus emociones en voz alta. Ponerle nombre reduce su intensidad automáticamente.","Explorá un espacio de acompañamiento (terapia, coaching) como lugar seguro para profundizar.","Sumá prácticas somáticas: yoga, breathwork o meditación con foco en las sensaciones corporales.","Tu inteligencia emocional es un activo enorme. Podés usarla para acompañar a otros en su proceso."],
-  naturaleza:    ["Salí a caminar 20 min en un espacio verde esta semana. Suficiente para reducir cortisol mediblemente.","Almorzá afuera cuando puedas o caminá descalzo/a en pasto. Las dosis pequeñas cuentan.","Convertí una actividad semanal en outdoor: caminata, lectura en un parque, mate al sol.","Llevá tu práctica de ejercicio o meditación al aire libre cuando el clima lo permita.","Probá una inmersión larga en naturaleza (2+ horas) al menos una vez al mes."],
-  vinculos:      ["Esta semana escribile a una persona que valorás. No un 'hola qué tal' — algo genuino y personal.","Priorizá una conversación profunda por semana con alguien importante. Sin celular en la mesa.","Considerá sumarte a un grupo o comunidad alineada con algo que te interese.","Profundizá con más vulnerabilidad y presencia. Son el combustible de las relaciones reales.","Seguí nutriendo tu red con intención. Tus relaciones son tu mayor activo de salud según la ciencia."],
-  suplementacion:["Antes de tomar suplementos, hacete un análisis de sangre completo. Sin datos, estás adivinando.","Los 3 con más evidencia: vitamina D (si no tomás sol), magnesio y omega-3. Consultá dosis con un profesional.","Revisá lo que tomás con un profesional para validar si realmente lo necesitás según tus niveles.","Actualizá tu protocolo cada 6 meses con nuevos análisis. Tu cuerpo cambia constantemente.","Tu enfoque basado en datos es excelente. Seguí ajustando con información real y profesional."],
-  digital:       ["Sacá el celular del cuarto a la noche. Si lo usás como alarma, invertí en un reloj despertador.","Desactivá notificaciones no esenciales. Cada interrupción te saca del foco por hasta 23 minutos.","Definí una 'zona libre de pantallas' en tu casa: la mesa de comer, tu cuarto, o ambos.","Sumá momentos sin estímulo digital: tu cerebro necesita esos espacios para entrar en modo reparación.","Tu relación con la tecnología es saludable. Compartí tus estrategias con alguien que lo necesite."],
-};
-
-const LABELS = ["Necesita atención", "En riesgo", "En desarrollo", "Buen camino", "Fortaleza"];
 const COLORS = ["#E8738A", "#F4A7B4", "#E8D87A", "#7FD6C9", "#3BC4B2"];
 const TXT_COLORS = ["#B8455E", "#B8455E", "#7A6A10", "#1F7F72", "#1F7F72"];
 const BG_COLORS = ["#FFF0F3", "#FFF0F3", "#FFFBE6", "#F0FAF7", "#F0FAF7"];
@@ -87,7 +64,7 @@ function buildEmailHtml(name, scores, avgScore) {
 
     <!-- Header -->
     <div style="text-align:center;margin-bottom:28px">
-      <div style="display:inline-block;background:#FFE3E9;color:#555555;font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:5px 16px;border-radius:40px;margin-bottom:16px">Autoconocimiento inspirado en ciencia de longevidad</div>
+      <div style="display:inline-block;background:#FFE3E9;color:#555555;font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:5px 16px;border-radius:40px;margin-bottom:16px">Autoconocimiento y longevidad · Edición 2026</div>
       <h1 style="font-family:'Playfair Display',Georgia,serif;font-size:30px;font-weight:600;color:#1A1A1A;margin:0 0 6px;line-height:1.2">Mapa de Bienestar Interior</h1>
       <p style="font-size:14px;color:#6F6A66;margin:0">by <strong style="color:#555555">Dani Navarro</strong></p>
     </div>

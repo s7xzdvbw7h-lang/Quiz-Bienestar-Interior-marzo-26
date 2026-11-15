@@ -5,7 +5,7 @@ const TXT_COLORS = ["#B8455E", "#B8455E", "#7A6A10", "#1F7F72", "#1F7F72"];
 const BG_COLORS = ["#FFF0F3", "#FFF0F3", "#FFFBE6", "#F0FAF7", "#F0FAF7"];
 
 const MAILERLITE_GROUP_ID = "182793529890702703";
-const IG_URL = "https://www.instagram.com/daninavarrocoach";
+const IG_URL = "https://www.instagram.com/daninavarro.bienestar";
 const ALLOWED_ORIGINS = [
   "https://quiz-bienestar-interior-marzo-26.vercel.app",
   "https://daninavarro.com.ar",
@@ -127,7 +127,7 @@ function buildEmailHtml(name, scores, avgScore) {
     <div style="text-align:center;margin-bottom:28px">
       <p style="font-size:13px;line-height:1.6;color:#555555;margin:0 0 14px">¿Querés acompañamiento paso a paso? Escribime y te cuento cómo es el Reto REPARA de 7 días.</p>
       <a href="${IG_URL}" style="display:inline-block;background:#E8738A;color:#ffffff;text-decoration:none;font-weight:600;font-size:14px;padding:13px 28px;border-radius:12px">Escribime por Instagram</a>
-      <p style="font-size:12px;color:#6F6A66;margin:10px 0 0">@daninavarrocoach</p>
+      <p style="font-size:12px;color:#6F6A66;margin:10px 0 0">@daninavarro.bienestar</p>
     </div>
 
     <!-- Sign off -->

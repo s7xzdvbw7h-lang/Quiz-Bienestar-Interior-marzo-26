@@ -6,8 +6,8 @@ export const AREAS = [
     id: "sueno", name: "Sueño Reparador", short: "Sueño", icon: "🌙",
     science: "Dormir bien no es solo cuántas horas: la regularidad de tus horarios también cuenta. En estudios de seguimiento de más de 15 años, dormir poco y a horarios cambiantes se asoció con peor salud a largo plazo. Son estudios observacionales: muestran una relación, no una causa.",
     source: "Estudios de cohorte sobre regularidad y duración del sueño (2023–2025)",
-    question: "¿Cómo dormiste en general este último mes?",
-    anchors: ["Duermo mal casi todas las noches y me levanto sin energía","Duermo poco o me despierto seguido, y el día se me hace cuesta arriba","Algunas noches duermo bien y otras no; mis horarios cambian bastante","Duermo bien la mayoría de las noches y mis horarios son bastante parecidos","Duermo bien casi todas las noches, a horarios parejos, y me levanto con energía"],
+    question: "¿Cuántas horas dormís por noche, en promedio?",
+    anchors: ["Menos de 5 horas por noche","Entre 5 y 6 horas por noche","Entre 6 y 7 horas por noche","7 a 8 horas, aunque mis horarios cambian bastante","7 a 8 horas, con horarios parejos, y me levanto descansada"],
   },
   {
     id: "alimentacion", name: "Alimentación Consciente", short: "Alimentación", icon: "🥗",

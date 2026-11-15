@@ -1,8 +1,8 @@
 import { AREAS, TIPS, LABELS } from "../shared/content.js";
 
-const COLORS = ["#E8738A", "#F4A7B4", "#E8D87A", "#7FD6C9", "#3BC4B2"];
-const TXT_COLORS = ["#B8455E", "#B8455E", "#7A6A10", "#1F7F72", "#1F7F72"];
-const BG_COLORS = ["#FFF0F3", "#FFF0F3", "#FFFBE6", "#F0FAF7", "#F0FAF7"];
+const COLORS = ["#8E4E52", "#AD8079", "#C2A878", "#8A7365", "#5F7A55"];
+const TXT_COLORS = ["#4A3B33", "#4A3B33", "#4A3B33", "#4A3B33", "#4A3B33"];
+const BG_COLORS = ["#E4D3CD", "#E4D3CD", "#E4D3CD", "#E4D3CD", "#E4D3CD"];
 
 const MAILERLITE_GROUP_ID = "182793529890702703";
 const IG_URL = "https://www.instagram.com/daninavarro.bienestar";
@@ -36,64 +36,64 @@ function buildEmailHtml(name, scores, avgScore) {
     const bgColor = BG_COLORS[sc - 1];
     const label = LABELS[sc - 1];
     return `
-      <div style="background:#ffffff;border:1.5px solid #F6D9DF;border-radius:14px;padding:18px 20px;margin-bottom:12px;border-left:4px solid ${color}">
-        <div style="font-size:10px;font-weight:700;color:#B8455E;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:8px">Prioridad ${idx + 1}</div>
+      <div style="background:#FDFAF5;border:1.5px solid #E2D5C8;border-radius:14px;padding:18px 20px;margin-bottom:12px;border-left:4px solid ${color}">
+        <div style="font-size:10px;font-weight:700;color:#8E4E52;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:8px">Prioridad ${idx + 1}</div>
         <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
           <span style="font-size:22px">${area.icon}</span>
           <div>
-            <div style="font-family:'Playfair Display',Georgia,serif;font-size:16px;font-weight:600;color:#1A1A1A;margin-bottom:4px">${area.name}</div>
+            <div style="font-family:'Fraunces',Georgia,serif;font-size:16px;font-weight:600;color:#4A3B33;margin-bottom:4px">${area.name}</div>
             <span style="font-size:11px;font-weight:600;padding:2px 10px;border-radius:20px;background:${bgColor};color:${TXT_COLORS[sc - 1]}">${label} &middot; ${sc}/5</span>
           </div>
         </div>
-        <div style="background:#FFF8FA;border-radius:10px;padding:12px 14px;display:flex;gap:10px">
+        <div style="background:#F7F1E9;border-radius:10px;padding:12px 14px;display:flex;gap:10px">
           <span style="font-size:16px;flex-shrink:0">💡</span>
-          <p style="font-size:13px;line-height:1.6;color:#4A4742;margin:0">${tip}</p>
+          <p style="font-size:13px;line-height:1.6;color:#4A3B33;margin:0">${tip}</p>
         </div>
       </div>`;
   }).join("");
 
   const strengthItems = strengths.length > 0
-    ? strengths.map(a => `<span style="display:inline-flex;align-items:center;gap:6px;background:#ffffff;border:1.5px solid #BFE9E2;border-radius:20px;padding:5px 14px;margin:4px;font-size:13px;color:#1A1A1A">${a.icon} ${a.name} <strong style="color:#E8738A">${scores[a.id]}/5</strong></span>`).join("")
-    : `<p style="font-size:13px;color:#555555;margin:0">Seguí trabajando — ¡las fortalezas se construyen con constancia!</p>`;
+    ? strengths.map(a => `<span style="display:inline-flex;align-items:center;gap:6px;background:#FDFAF5;border:1.5px solid #C2A878;border-radius:20px;padding:5px 14px;margin:4px;font-size:13px;color:#4A3B33">${a.icon} ${a.name} <strong style="color:#8E4E52">${scores[a.id]}/5</strong></span>`).join("")
+    : `<p style="font-size:13px;color:#4A3B33;margin:0">Seguí trabajando — ¡las fortalezas se construyen con constancia!</p>`;
 
   return `<!DOCTYPE html>
 <html lang="es">
 <head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Tu Mapa de Bienestar Interior</title></head>
-<body style="margin:0;padding:0;background:#FFF0F3;font-family:'Poppins',Helvetica,Arial,sans-serif;color:#1A1A1A">
+<body style="margin:0;padding:0;background:#F7F1E9;font-family:'Manrope',Helvetica,Arial,sans-serif;color:#4A3B33">
   <div style="max-width:560px;margin:0 auto;padding:32px 16px 48px">
 
     <!-- Header -->
     <div style="text-align:center;margin-bottom:28px">
-      <div style="display:inline-block;background:#FFE3E9;color:#555555;font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:5px 16px;border-radius:40px;margin-bottom:16px">Autoconocimiento y longevidad · Edición 2026</div>
-      <h1 style="font-family:'Playfair Display',Georgia,serif;font-size:30px;font-weight:600;color:#1A1A1A;margin:0 0 6px;line-height:1.2">Mapa de Bienestar Interior</h1>
-      <p style="font-size:14px;color:#6F6A66;margin:0">by <strong style="color:#555555">Dani Navarro</strong></p>
+      <div style="display:inline-block;background:#E4D3CD;color:#4A3B33;font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:5px 16px;border-radius:40px;margin-bottom:16px">Autoconocimiento y longevidad · Edición 2026</div>
+      <h1 style="font-family:'Fraunces',Georgia,serif;font-size:30px;font-weight:600;color:#4A3B33;margin:0 0 6px;line-height:1.2">Mapa de Bienestar Interior</h1>
+      <p style="font-size:14px;color:#4A3B33;margin:0">by <strong style="color:#4A3B33">Dani Navarro</strong></p>
     </div>
 
     <!-- Greeting -->
-    <p style="font-size:15px;line-height:1.65;color:#4A4742;margin:0 0 24px">Hola <strong>${esc(name)}</strong>! 👋 Completaste tu Mapa de Bienestar Interior. Acá están tus resultados y un primer paso concreto para esta semana.</p>
+    <p style="font-size:15px;line-height:1.65;color:#4A3B33;margin:0 0 24px">Hola <strong>${esc(name)}</strong>! 👋 Completaste tu Mapa de Bienestar Interior. Acá están tus resultados y un primer paso concreto para esta semana.</p>
 
     <!-- Score -->
-    <div style="background:#ffffff;border:1.5px solid #F6D9DF;border-radius:16px;padding:28px 20px;text-align:center;margin-bottom:20px">
-      <p style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:#6F6A66;margin:0 0 14px">Tu puntaje general</p>
-      <div style="display:inline-block;background:#F0FAF7;border:2px solid #BFE9E2;border-radius:50%;width:88px;height:88px;line-height:88px;text-align:center">
-        <span style="font-family:'Playfair Display',Georgia,serif;font-size:34px;font-weight:700;color:#E8738A">${avgScore}</span><span style="font-size:13px;color:#6F6A66">/5</span>
+    <div style="background:#FDFAF5;border:1.5px solid #E2D5C8;border-radius:16px;padding:28px 20px;text-align:center;margin-bottom:20px">
+      <p style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:#4A3B33;margin:0 0 14px">Tu puntaje general</p>
+      <div style="display:inline-block;background:#E4D3CD;border:2px solid #C2A878;border-radius:50%;width:88px;height:88px;line-height:88px;text-align:center">
+        <span style="font-family:'Fraunces',Georgia,serif;font-size:34px;font-weight:700;color:#8E4E52">${avgScore}</span><span style="font-size:13px;color:#4A3B33">/5</span>
       </div>
-      <p style="font-size:14px;line-height:1.6;color:#555555;max-width:380px;margin:14px auto 0">${getMotivationalMsg(parseFloat(avgScore))}</p>
+      <p style="font-size:14px;line-height:1.6;color:#4A3B33;max-width:380px;margin:14px auto 0">${getMotivationalMsg(parseFloat(avgScore))}</p>
     </div>
 
     <!-- Scores grid -->
-    <div style="background:#ffffff;border:1.5px solid #F6D9DF;border-radius:16px;padding:20px;margin-bottom:20px">
-      <p style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:#6F6A66;margin:0 0 14px">Resultados por área</p>
+    <div style="background:#FDFAF5;border:1.5px solid #E2D5C8;border-radius:16px;padding:20px;margin-bottom:20px">
+      <p style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:#4A3B33;margin:0 0 14px">Resultados por área</p>
       <table style="width:100%;border-collapse:collapse">
         ${AREAS.map(area => {
           const sc = scores[area.id] || 1;
           const color = COLORS[sc - 1];
           const pct = (sc / 5) * 100;
-          return `<tr style="border-bottom:1px solid #F2F0EB">
+          return `<tr style="border-bottom:1px solid #E4D3CD">
             <td style="padding:8px 0;width:36px;font-size:16px">${area.icon}</td>
-            <td style="padding:8px 8px 8px 0;font-size:13px;color:#1A1A1A">${area.name}</td>
+            <td style="padding:8px 8px 8px 0;font-size:13px;color:#4A3B33">${area.name}</td>
             <td style="padding:8px 0;width:120px">
-              <div style="height:5px;border-radius:3px;background:#F2F0EB;overflow:hidden">
+              <div style="height:5px;border-radius:3px;background:#E4D3CD;overflow:hidden">
                 <div style="height:100%;border-radius:3px;background:${color};width:${pct}%"></div>
               </div>
             </td>
@@ -104,42 +104,42 @@ function buildEmailHtml(name, scores, avgScore) {
     </div>
 
     <!-- Priorities -->
-    <h2 style="font-family:'Playfair Display',Georgia,serif;font-size:20px;font-weight:600;color:#1A1A1A;margin:0 0 6px">Tus 3 áreas prioritarias</h2>
-    <p style="font-size:13px;color:#6F6A66;margin:0 0 14px">Con el primer paso concreto para esta semana</p>
+    <h2 style="font-family:'Fraunces',Georgia,serif;font-size:20px;font-weight:600;color:#4A3B33;margin:0 0 6px">Tus 3 áreas prioritarias</h2>
+    <p style="font-size:13px;color:#4A3B33;margin:0 0 14px">Con el primer paso concreto para esta semana</p>
     ${priorityCards}
 
     <!-- Strengths -->
     ${strengths.length > 0 ? `
-    <div style="background:#F0FAF7;border:1.5px solid #BFE9E2;border-radius:14px;padding:18px 20px;margin-top:8px;margin-bottom:24px">
-      <p style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:#E8738A;margin:0 0 10px">✨ Tus fortalezas (${strengths.length > 1 ? "áreas" : "área"} con puntaje ≥ 4)</p>
+    <div style="background:#E4D3CD;border:1.5px solid #C2A878;border-radius:14px;padding:18px 20px;margin-top:8px;margin-bottom:24px">
+      <p style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:#8E4E52;margin:0 0 10px">✨ Tus fortalezas (${strengths.length > 1 ? "áreas" : "área"} con puntaje ≥ 4)</p>
       <div>${strengthItems}</div>
-      <p style="font-size:12.5px;color:#1F6F64;margin:10px 0 0;line-height:1.5">Estas áreas son un pilar sólido de tu bienestar. Usalas como base para trabajar en las demás.</p>
+      <p style="font-size:12.5px;color:#4A3B33;margin:10px 0 0;line-height:1.5">Estas áreas son un pilar sólido de tu bienestar. Usalas como base para trabajar en las demás.</p>
     </div>` : `<div style="margin-bottom:24px"></div>`}
 
     <!-- What's next -->
-    <div style="background:#ffffff;border:2px solid #E8738A;border-radius:16px;padding:22px 20px;text-align:center;margin-bottom:24px">
+    <div style="background:#FDFAF5;border:2px solid #8E4E52;border-radius:16px;padding:22px 20px;text-align:center;margin-bottom:24px">
       <span style="font-size:26px">📬</span>
-      <h3 style="font-family:'Playfair Display',Georgia,serif;font-size:17px;font-weight:600;color:#1A1A1A;margin:8px 0 8px">Esto recién empieza</h3>
-      <p style="font-size:13px;line-height:1.6;color:#555555;margin:0">En los próximos días te llegan micro-acciones para tus áreas prioritarias. Revisá tu bandeja (y spam, por las dudas) y marcalos como <strong>"no es spam"</strong> para que lleguen siempre.</p>
+      <h3 style="font-family:'Fraunces',Georgia,serif;font-size:17px;font-weight:600;color:#4A3B33;margin:8px 0 8px">Esto recién empieza</h3>
+      <p style="font-size:13px;line-height:1.6;color:#4A3B33;margin:0">En los próximos días te llegan micro-acciones para tus áreas prioritarias. Revisá tu bandeja (y spam, por las dudas) y marcalos como <strong>"no es spam"</strong> para que lleguen siempre.</p>
     </div>
 
     <!-- CTA -->
     <div style="text-align:center;margin-bottom:28px">
-      <p style="font-size:13px;line-height:1.6;color:#555555;margin:0 0 14px">Estoy terminando el Reset, mi programa de 7 días para acompañarte paso a paso. Escribime por Instagram y te aviso apenas esté disponible.</p>
-      <a href="${IG_URL}" style="display:inline-block;background:#E8738A;color:#ffffff;text-decoration:none;font-weight:600;font-size:14px;padding:13px 28px;border-radius:12px">Escribime por Instagram</a>
-      <p style="font-size:12px;color:#6F6A66;margin:10px 0 0">@daninavarro.bienestar</p>
+      <p style="font-size:13px;line-height:1.6;color:#4A3B33;margin:0 0 14px">Estoy terminando el Reset, mi programa de 7 días para acompañarte paso a paso. Escribime por Instagram y te aviso apenas esté disponible.</p>
+      <a href="${IG_URL}" style="display:inline-block;background:#8E4E52;color:#F7F1E9;text-decoration:none;font-weight:600;font-size:14px;padding:13px 28px;border-radius:12px">Escribime por Instagram</a>
+      <p style="font-size:12px;color:#4A3B33;margin:10px 0 0">@daninavarro.bienestar</p>
     </div>
 
     <!-- Sign off -->
-    <p style="font-size:14px;line-height:1.7;color:#4A4742;margin:0 0 4px">Con cariño,</p>
-    <p style="font-family:'Playfair Display',Georgia,serif;font-size:18px;font-weight:600;color:#1A1A1A;margin:0 0 32px">Dani Navarro 🌿</p>
+    <p style="font-size:14px;line-height:1.7;color:#4A3B33;margin:0 0 4px">Con cariño,</p>
+    <p style="font-family:'Fraunces',Georgia,serif;font-size:18px;font-weight:600;color:#4A3B33;margin:0 0 32px">Dani Navarro 🌿</p>
 
     <!-- Footer -->
-    <div style="border-top:1px solid #F6D9DF;padding-top:16px;text-align:center">
-      <p style="font-size:11px;color:#8A8480;margin:0">Mapa de Bienestar Interior &middot; by Dani Navarro</p>
-      <p style="font-size:10.5px;line-height:1.5;color:#6F6A66;margin:8px 0 0">Este mapa es una herramienta de autoconocimiento. No es un diagnóstico ni reemplaza la atención médica, nutricional o psicológica.</p>
-      <p style="font-size:10.5px;line-height:1.5;color:#6F6A66;margin:8px 0 0">Recibís este mail porque completaste el quiz y aceptaste recibir contenido de Dani Navarro. Podés darte de baja cuando quieras desde los mails de la secuencia, o respondiendo "baja" a este mensaje.</p>
-      <p style="font-size:10px;color:#8A8480;opacity:0.8;margin:6px 0 0">Herramienta de autoconocimiento, no reemplaza la atención profesional</p>
+    <div style="border-top:1px solid #E2D5C8;padding-top:16px;text-align:center">
+      <p style="font-size:11px;color:#4A3B33;margin:0">Mapa de Bienestar Interior &middot; by Dani Navarro</p>
+      <p style="font-size:10.5px;line-height:1.5;color:#4A3B33;margin:8px 0 0">Este mapa es una herramienta de autoconocimiento. No es un diagnóstico ni reemplaza la atención médica, nutricional o psicológica.</p>
+      <p style="font-size:10.5px;line-height:1.5;color:#4A3B33;margin:8px 0 0">Recibís este mail porque completaste el quiz y aceptaste recibir contenido de Dani Navarro. Podés darte de baja cuando quieras desde los mails de la secuencia, o respondiendo "baja" a este mensaje.</p>
+      <p style="font-size:10px;color:#4A3B33;opacity:0.8;margin:6px 0 0">Herramienta de autoconocimiento, no reemplaza la atención profesional</p>
     </div>
 
   </div>

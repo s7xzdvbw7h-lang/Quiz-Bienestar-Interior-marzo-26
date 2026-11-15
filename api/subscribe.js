@@ -5,7 +5,7 @@ const TXT_COLORS = ["#4A3B33", "#4A3B33", "#4A3B33", "#4A3B33", "#4A3B33"];
 const BG_COLORS = ["#E4D3CD", "#E4D3CD", "#E4D3CD", "#E4D3CD", "#E4D3CD"];
 
 const MAILERLITE_GROUP_ID = "182793529890702703";
-const IG_URL = "https://www.instagram.com/daninavarro.bienestar";
+const RESET_URL = "https://daninavarro.com.ar/reset";
 const ALLOWED_ORIGINS = [
   "https://quiz-bienestar-interior-marzo-26.vercel.app",
   "https://daninavarro.com.ar",
@@ -125,9 +125,8 @@ function buildEmailHtml(name, scores, avgScore) {
 
     <!-- CTA -->
     <div style="text-align:center;margin-bottom:28px">
-      <p style="font-size:13px;line-height:1.6;color:#4A3B33;margin:0 0 14px">Estoy terminando el Reset, mi programa de 7 días para acompañarte paso a paso. Escribime por Instagram y te aviso apenas esté disponible.</p>
-      <a href="${IG_URL}" style="display:inline-block;background:#8E4E52;color:#F7F1E9;text-decoration:none;font-weight:600;font-size:14px;padding:13px 28px;border-radius:12px">Escribime por Instagram</a>
-      <p style="font-size:12px;color:#4A3B33;margin:10px 0 0">@daninavarro.bienestar</p>
+      <p style="font-size:13px;line-height:1.6;color:#4A3B33;margin:0 0 14px">Seguí con el Reset, mi programa de 7 días para acompañarte paso a paso.</p>
+      <a href="${RESET_URL}" style="display:inline-block;background:#8E4E52;color:#F7F1E9;text-decoration:none;font-weight:600;font-size:14px;padding:13px 28px;border-radius:12px">Conocé el Reset</a>
     </div>
 
     <!-- Sign off -->
@@ -207,7 +206,7 @@ export default async function handler(req, res) {
   // 2. MailerSend: results email
   let msOk = false;
   try {
-    const textBody = `Hola ${name}!\n\nTu puntaje general: ${avgScore}/5\n\n${getMotivationalMsg(parseFloat(avgScore))}\n\nResultados:\n${AREAS.map(a => `${a.name}: ${scores[a.id]}/5`).join('\n')}\n\nSi querés acompañamiento: ${IG_URL}\n\nEste mapa es una herramienta de autoconocimiento y no reemplaza la atención profesional.\n\nCon cariño,\nDani Navarro`;
+    const textBody = `Hola ${name}!\n\nTu puntaje general: ${avgScore}/5\n\n${getMotivationalMsg(parseFloat(avgScore))}\n\nResultados:\n${AREAS.map(a => `${a.name}: ${scores[a.id]}/5`).join('\n')}\n\nSeguí con el Reset: ${RESET_URL}\n\nEste mapa es una herramienta de autoconocimiento y no reemplaza la atención profesional.\n\nCon cariño,\nDani Navarro`;
     const msRes = await fetch('https://api.mailersend.com/v1/email', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${MAILERSEND_KEY}` },

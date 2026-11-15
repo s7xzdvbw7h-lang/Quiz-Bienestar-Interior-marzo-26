@@ -1,5 +1,6 @@
 import { useState, useRef } from "react";
 
+const RESET_URL = "https://daninavarro.com.ar/reset";
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw5OM2TukvtEeqYj7a2Mw40ETWVSimu4WoQCrYMaqC-GVsXZwntG3y7xqbgDLarlSYThQ/exec";
 
 import { AREAS, TIPS, LABELS, EDITION } from "../shared/content.js";
@@ -180,10 +181,10 @@ export default function App() {
 
         <div style={{background:"#E4D3CD",border:"1.5px solid #C2A878",borderRadius:14,padding:"15px 17px",margin:"14px 0 22px"}}><div style={{display:"flex",alignItems:"center",gap:8,marginBottom:5}}><span style={{fontSize:20}}>{best?.icon}</span><strong style={{fontSize:14}}>Tu mayor fortaleza: {best?.name}</strong></div><p style={{fontSize:13.5,color:"#4A3B33",lineHeight:1.5}}>Esta área es un pilar sólido de tu bienestar. Usala como base para trabajar en las demás.</p></div>
 
-        <div style={{background:"#FDFAF5",border:`2px solid ${g}`,borderRadius:18,padding:"24px 22px",textAlign:"center",marginBottom:14}}><span style={{fontSize:26}}>📬</span><h3 style={{fontFamily:sf,fontSize:18,fontWeight:600,marginTop:8,marginBottom:6}}>Revisá tu correo</h3><p style={{fontSize:13,lineHeight:1.6,color:"#4A3B33",maxWidth:370,margin:"0 auto"}}>{mailOk?<>Te enviamos tu mapa a <strong style={{color:"#4A3B33"}}>{email}</strong>, y en los próximos días te llegan micro-acciones para tus áreas prioritarias. Si no lo ves, mirá en spam o promociones.</>:<>No pudimos enviarte el mail ahora. Sacale captura a esta pantalla para guardar tu mapa y escribime por Instagram si no te llega nada.</>}</p></div>
+        <div style={{background:"#FDFAF5",border:`2px solid ${g}`,borderRadius:18,padding:"24px 22px",textAlign:"center",marginBottom:14}}><span style={{fontSize:26}}>📬</span><h3 style={{fontFamily:sf,fontSize:18,fontWeight:600,marginTop:8,marginBottom:6}}>Revisá tu correo</h3><p style={{fontSize:13,lineHeight:1.6,color:"#4A3B33",maxWidth:370,margin:"0 auto"}}>{mailOk?<>Te enviamos tu mapa a <strong style={{color:"#4A3B33"}}>{email}</strong>, y en los próximos días te llegan micro-acciones para tus áreas prioritarias. Si no lo ves, mirá en spam o promociones.</>:<>No pudimos enviarte el mail ahora. Sacale captura a esta pantalla para guardar tu mapa y volvé a intentarlo en unos minutos.</>}</p></div>
 
         <div style={{background:"linear-gradient(180deg,#FDFAF5,#E4D3CD)",borderTop:"3px solid #C2A878",borderRadius:18,padding:"28px 22px",textAlign:"center",marginBottom:20}}>
-          <h2 style={{fontFamily:sf,fontSize:20,fontWeight:600,color:"#4A3B33",marginBottom:8}}>¿Querés ir más allá?</h2><p style={{fontSize:13,lineHeight:1.6,color:"#4A3B33",maxWidth:360,margin:"0 auto 16px"}}>Estoy terminando el <strong style={{color:"#8E4E52"}}>Reset</strong>, mi programa de 7 días para acompañarte paso a paso. Escribime por Instagram y te aviso apenas esté disponible.</p><a href="https://ig.me/m/daninavarro.bienestar" target="_blank" rel="noopener noreferrer" style={{...btn,maxWidth:320,margin:"0 auto",display:"block",textDecoration:"none",textAlign:"center"}}>Escribime por Instagram</a>
+          <h2 style={{fontFamily:sf,fontSize:20,fontWeight:600,color:"#4A3B33",marginBottom:8}}>¿Querés ir más allá?</h2><p style={{fontSize:13,lineHeight:1.6,color:"#4A3B33",maxWidth:360,margin:"0 auto 16px"}}>Seguí con el <strong style={{color:"#8E4E52"}}>Reset</strong>, mi programa de 7 días para acompañarte paso a paso.</p><a href={RESET_URL} target="_blank" rel="noopener noreferrer" style={{...btn,maxWidth:320,margin:"0 auto",display:"block",textDecoration:"none",textAlign:"center"}}>Conocé el Reset</a>
         </div>
 
         <p style={{fontSize:12.5,lineHeight:1.5,color:"#4A3B33",textAlign:"center",maxWidth:400,margin:"0 auto 14px"}}>Este mapa es una herramienta de autoconocimiento. No es un diagnóstico ni reemplaza la atención médica, nutricional o psicológica.</p>

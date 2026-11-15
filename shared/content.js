@@ -23,7 +23,7 @@ export const AREAS = [
     "name": "Alimentación Consciente",
     "short": "Alimentación",
     "icon": "🥗",
-    "science": "Lo que comés es información directa para tus genes. No solo importa qué comés, sino cuándo: dejar un ayuno digestivo de al menos 12 horas entre la cena y el desayuno le da a tu cuerpo un descanso para su limpieza celular (autofagia). Un ensayo en personas del equipo de Valter Longo mostró mejoras metabólicas con ciclos de dieta que imita el ayuno.",
+    "science": "Lo que comés es información directa para tus genes. Y no solo importa qué comés, sino cuándo: dejar al menos 12 horas entre la cena y el desayuno le da un descanso a tu sistema digestivo. Otra cosa distinta es la autofagia, la limpieza celular que elimina componentes dañados. Se estudia con ayunos más largos y con dietas que imitan el ayuno, como las del equipo del Dr. Valter Longo (USC), con resultados prometedores en personas.",
     "source": "Dr. Valter Longo — Instituto de Longevidad, USC",
     "question": "¿Cómo es tu relación con la alimentación?",
     "anchors": [

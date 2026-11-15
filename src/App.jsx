@@ -9,7 +9,7 @@ const TXT_COLORS = ["#B8455E","#B8455E","#7A6A10","#1F7F72","#1F7F72"];
 const BG_COLORS = ["#FFF0F3","#FFF0F3","#FFFBE6","#F0FAF7","#F0FAF7"];
 
 function RadarChart({ scores, size = 290 }) {
-  const cx = size/2, cy = size/2, r = size*0.32, n = AREAS.length, angleStep = (2*Math.PI)/n, angleOff = -Math.PI/2;
+  const cx = size/2, cy = size/2, r = size*0.29, n = AREAS.length, angleStep = (2*Math.PI)/n, angleOff = -Math.PI/2;
   const pt = (i,v) => { const a=angleOff+i*angleStep; return [cx+((v/5)*r)*Math.cos(a), cy+((v/5)*r)*Math.sin(a)]; };
   return (
     <svg viewBox={`0 0 ${size} ${size}`} style={{width:"100%",maxWidth:size}}>
@@ -185,7 +185,7 @@ export default function App() {
         <div style={{background:"#fff",border:`2px solid ${g}`,borderRadius:18,padding:"24px 22px",textAlign:"center",marginBottom:14}}><span style={{fontSize:26}}>📬</span><h3 style={{fontFamily:sf,fontSize:18,fontWeight:600,marginTop:8,marginBottom:6}}>Revisá tu correo</h3><p style={{fontSize:13,lineHeight:1.6,color:"#555555",maxWidth:370,margin:"0 auto"}}>{mailOk?<>Te enviamos tu mapa a <strong style={{color:"#1A1A1A"}}>{email}</strong>, y en los próximos días te llegan micro-acciones para tus áreas prioritarias. Si no lo ves, mirá en spam o promociones.</>:<>No pudimos enviarte el mail ahora. Sacale captura a esta pantalla para guardar tu mapa y escribime por Instagram si no te llega nada.</>}</p></div>
 
         <div style={{background:"#1A1A1A",borderRadius:18,padding:"28px 22px",textAlign:"center",marginBottom:20}}>
-          <h2 style={{fontFamily:sf,fontSize:20,fontWeight:600,color:"#FFF0F3",marginBottom:8}}>¿Querés ir más allá?</h2><p style={{fontSize:13,lineHeight:1.6,color:"#D9D4D0",maxWidth:360,margin:"0 auto 16px"}}>Si querés un acompañamiento paso a paso, el <strong style={{color:"#BFE9E2"}}>Reto REPARA de 7 días</strong> es el siguiente paso. Escribime por Instagram y te cuento cómo es.</p><a href="https://ig.me/m/daninavarro.bienestar" target="_blank" rel="noopener noreferrer" style={{...btn,maxWidth:320,margin:"0 auto",display:"block",textDecoration:"none",textAlign:"center"}}>Escribime por Instagram</a>
+          <h2 style={{fontFamily:sf,fontSize:20,fontWeight:600,color:"#FFF0F3",marginBottom:8}}>¿Querés ir más allá?</h2><p style={{fontSize:13,lineHeight:1.6,color:"#D9D4D0",maxWidth:360,margin:"0 auto 16px"}}>Estoy terminando el <strong style={{color:"#BFE9E2"}}>Reset</strong>, mi programa de 7 días para acompañarte paso a paso. Escribime por Instagram y te aviso apenas esté disponible.</p><a href="https://ig.me/m/daninavarro.bienestar" target="_blank" rel="noopener noreferrer" style={{...btn,maxWidth:320,margin:"0 auto",display:"block",textDecoration:"none",textAlign:"center"}}>Escribime por Instagram</a>
         </div>
 
         <p style={{fontSize:11,lineHeight:1.5,color:"#6F6A66",textAlign:"center",maxWidth:400,margin:"0 auto 14px"}}>Este mapa es una herramienta de autoconocimiento. No es un diagnóstico ni reemplaza la atención médica, nutricional o psicológica.</p>

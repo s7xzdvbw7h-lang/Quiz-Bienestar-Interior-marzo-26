@@ -125,7 +125,7 @@ function buildEmailHtml(name, scores, avgScore) {
 
     <!-- CTA -->
     <div style="text-align:center;margin-bottom:28px">
-      <p style="font-size:13px;line-height:1.6;color:#555555;margin:0 0 14px">¿Querés acompañamiento paso a paso? Escribime y te cuento cómo es el Reto REPARA de 7 días.</p>
+      <p style="font-size:13px;line-height:1.6;color:#555555;margin:0 0 14px">Estoy terminando el Reset, mi programa de 7 días para acompañarte paso a paso. Escribime por Instagram y te aviso apenas esté disponible.</p>
       <a href="${IG_URL}" style="display:inline-block;background:#E8738A;color:#ffffff;text-decoration:none;font-weight:600;font-size:14px;padding:13px 28px;border-radius:12px">Escribime por Instagram</a>
       <p style="font-size:12px;color:#6F6A66;margin:10px 0 0">@daninavarro.bienestar</p>
     </div>

@@ -1,136 +1,217 @@
-// Contenido del quiz (edición noviembre 2026). Fuente única: la usan el quiz (src/App.jsx) y el mail (api/subscribe.js).
+// Contenido del quiz (versión de abril, restaurada). Compartido entre la app y el mail.
 export const EDITION = "Edición 2026";
 
 export const AREAS = [
   {
-    id: "sueno", name: "Sueño Reparador", short: "Sueño", icon: "🌙",
-    science: "Dormir bien no es solo cuántas horas: la regularidad de tus horarios también cuenta. En estudios de seguimiento de más de 15 años, dormir poco y a horarios cambiantes se asoció con peor salud a largo plazo. Son estudios observacionales: muestran una relación, no una causa.",
-    source: "Estudios de cohorte sobre regularidad y duración del sueño (2023–2025)",
-    question: "¿Cuántas horas dormís por noche, en promedio?",
-    anchors: ["Menos de 5 horas por noche","Entre 5 y 6 horas por noche","Entre 6 y 7 horas por noche","7 a 8 horas, aunque mis horarios cambian bastante","7 a 8 horas, con horarios parejos, y me levanto descansada"],
+    "id": "sueno",
+    "name": "Sueño Reparador",
+    "short": "Sueño",
+    "icon": "🌙",
+    "science": "Mientras dormís profundamente, tu cerebro activa el sistema glinfático: una red que elimina proteínas tóxicas acumuladas durante el día. Estudios en UC Berkeley muestran que dormir menos de 6 horas de forma crónica debilita las defensas y acelera el deterioro cognitivo.",
+    "source": "Dr. Matthew Walker — neurocientífico, UC Berkeley",
+    "question": "¿Cómo es tu sueño habitualmente?",
+    "anchors": [
+      "Duermo poco y mal, sin rutina de horarios",
+      "Irregular: algunas noches descanso, otras no",
+      "Generalmente bien, pero me cuesta ser constante",
+      "Duermo 7-8hs la mayoría de las noches",
+      "Sueño profundo y consistente, con rutina estable"
+    ]
   },
   {
-    id: "alimentacion", name: "Alimentación Consciente", short: "Alimentación", icon: "🥗",
-    science: "Lo que comés pesa más que el reloj, pero el reloj también cuenta: darle a tu cuerpo un ayuno digestivo (por ejemplo, 12 horas entre la cena y el desayuno) es una práctica simple. El equipo del Dr. Valter Longo (USC) vio en ensayos con personas mejoras metabólicas con ciclos de dieta que imita el ayuno, y un estudio piloto de 2025 con 30 adultos midió señales de autofagia. Son estudios chicos y cortos, y parte está financiada por una empresa de Longo: es promisorio, no definitivo.",
-    source: "Longo y colaboradores: Nature Communications (2024) y GeroScience (2025)",
-    question: "¿Cómo es tu alimentación en una semana normal?",
-    anchors: ["Casi todo lo que como es procesado, o salteo comidas","Predominan los procesados y como a cualquier hora","La mitad de los días como comida real","Comida real casi todos los días, con proteína y verduras en la mayoría de las comidas","Comida real casi siempre, con proteína y verduras, y 12 horas o más sin comer entre la cena y el desayuno"],
+    "id": "alimentacion",
+    "name": "Alimentación Consciente",
+    "short": "Alimentación",
+    "icon": "🥗",
+    "science": "Lo que comés es información directa para tus genes. Períodos sin comer activan la autofagia — un proceso de limpieza celular que elimina componentes dañados. No solo importa qué comés, sino cuándo: el horario influye en tu metabolismo e inflamación.",
+    "source": "Dr. Valter Longo — Instituto de Longevidad, USC",
+    "question": "¿Cómo es tu relación con la alimentación?",
+    "anchors": [
+      "Bastante procesada, como por impulso o sin horarios",
+      "Mezclo comida real con bastante procesado",
+      "Intento comer bien pero no logro ser constante",
+      "Buena base de alimentación, con algún desliz puntual",
+      "Alimentos reales, horarios definidos, como con consciencia"
+    ]
   },
   {
-    id: "movimiento", name: "Movimiento y Fuerza", short: "Movimiento", icon: "🏃",
-    science: "Un meta-análisis de 24 estudios (The Lancet Public Health) asoció caminar alrededor de 7.000 pasos por día con menos riesgo de mortalidad, enfermedad cardiovascular y diabetes tipo 2, y el beneficio sigue creciendo, más despacio, hasta unos 10.000–12.000. Y en más de 5.000 mujeres de 63 a 99 años (JAMA Network Open, 2026), más fuerza de agarre y levantarse más rápido de una silla se asociaron con menor mortalidad.",
-    source: "The Lancet Public Health (meta-análisis) · JAMA Network Open, feb. 2026",
-    question: "¿Cuánto te movés y cuánta fuerza trabajás?",
-    anchors: ["Casi no camino ni entreno; paso la mayor parte del día sentado/a","Camino poco (menos de 5.000 pasos) y hago ejercicio solo de vez en cuando","Camino bastante o entreno 2 veces por semana, pero sin trabajo de fuerza","Camino cerca de 7.000 pasos y hago fuerza 1–2 veces por semana","Camino a diario, hago fuerza 2–3 veces por semana y sumo movilidad"],
+    "id": "movimiento",
+    "name": "Movimiento Diario",
+    "short": "Movimiento",
+    "icon": "🏃",
+    "science": "El ejercicio libera BDNF, una proteína que estimula el crecimiento de nuevas neuronas. Estudios muestran que caminar solo 15 minutos al día reduce el riesgo cardiovascular un 22%. Después de los 40, la masa muscular es uno de los mejores predictores de longevidad.",
+    "source": "Dr. Peter Attia — médico, especialista en longevidad",
+    "question": "¿Cuánto movimiento hacés por semana?",
+    "anchors": [
+      "Muy poco, paso la mayor parte del día sentado/a",
+      "Algún movimiento esporádico, sin rutina definida",
+      "Me muevo 2-3 veces por semana con cierta regularidad",
+      "Activo/a, entreno o camino 4+ veces por semana",
+      "Combino fuerza, cardio y movilidad con regularidad"
+    ]
   },
   {
-    id: "estres", name: "Gestión del Estrés", short: "Estrés", icon: "🧘‍♀️",
-    science: "El estrés sostenido se asocia con peor sueño, más tensión corporal y más dificultad para sostener hábitos. Lo que sí podés entrenar son prácticas que bajan la activación en el momento: respiración lenta, pausas, caminar, contacto con otras personas.",
-    source: "Investigación en regulación del estrés y respiración lenta",
-    question: "¿Cómo gestionás el estrés del día a día?",
-    anchors: ["Vivo acelerado/a y casi nunca logro bajar el ritmo, ni al final del día","Me supera seguido y no tengo una herramienta clara","Tengo alguna práctica (respirar, caminar), pero la uso recién cuando ya exploté","Uso una práctica de regulación varias veces por semana y noto la diferencia","Tengo prácticas diarias y me recupero rápido después de un día difícil"],
+    "id": "estres",
+    "name": "Gestión del Estrés",
+    "short": "Estrés",
+    "icon": "🧘‍♀️",
+    "science": "El estrés crónico acorta los telómeros — los protectores de tu ADN — acelerando el envejecimiento celular. Pero la investigación de Blackburn y Epel demostró que prácticas de regulación como la meditación pueden proteger y preservar los telómeros con el tiempo.",
+    "source": "Dra. Elizabeth Blackburn y Dra. Elissa Epel — Premio Nobel 2009",
+    "question": "¿Cómo gestionás el estrés del día a día?",
+    "anchors": [
+      "Me siento desbordado/a con frecuencia",
+      "El estrés me afecta bastante, intento pero me cuesta",
+      "Lo manejo más o menos, a veces me supera",
+      "Tengo herramientas que uso con bastante regularidad",
+      "Gestiono bien el estrés, me recupero rápido"
+    ]
   },
   {
-    id: "emocional", name: "Salud Emocional", short: "Emocional", icon: "💜",
-    science: "Poner en palabras lo que sentís es una de las herramientas de regulación emocional más estudiadas: ayuda a que la emoción pierda intensidad y a decidir mejor. Si esta área te mueve algo fuerte, mirala con calma y, si lo necesitás, con acompañamiento profesional.",
-    source: "Investigación sobre regulación emocional y 'etiquetado' de emociones",
-    question: "¿Cómo está tu relación con tus emociones?",
-    anchors: ["Me cuesta ponerle nombre a lo que siento; suelo aguantar o desconectarme","Reconozco lo que siento, pero reacciono antes de poder frenar","Puedo nombrar lo que siento y a veces lo expreso","Registro, nombro y expreso mis emociones, y pido ayuda cuando hace falta","Tengo un trabajo emocional sostenido (escritura, terapia, práctica) y me siento acompañado/a"],
+    "id": "emocional",
+    "name": "Salud Emocional",
+    "short": "Emocional",
+    "icon": "💜",
+    "science": "Las emociones no procesadas generan tensión crónica e inflamación sistémica. Nombrar lo que sentimos activa la corteza prefrontal, reduciendo la reactividad de la amígdala y mejorando decisiones y relaciones.",
+    "source": "Dr. Gabor Maté — médico, experto en trauma y estrés",
+    "question": "¿Cómo está tu relación con tus emociones?",
+    "anchors": [
+      "Me cuesta conectar con lo que siento",
+      "Reconozco algunas emociones pero me cuesta gestionarlas",
+      "Voy aprendiendo, a veces bien y a veces no tanto",
+      "Proceso bastante bien mis emociones, me conozco",
+      "Tengo un trabajo interior activo y constante"
+    ]
   },
   {
-    id: "naturaleza", name: "Conexión con la Naturaleza", short: "Naturaleza", icon: "🌿",
-    science: "Pasar tiempo en espacios verdes se asocia con menos estrés y mejor ánimo, y la luz natural de la mañana ayuda a ordenar tu reloj biológico. No hace falta un viaje: pequeñas dosis repetidas suman.",
-    source: "Revisiones sobre exposición a espacios verdes y luz natural",
-    question: "¿Cuánto contacto tenés con la naturaleza y la luz natural?",
-    anchors: ["Paso casi todo el día en interiores","Salgo poco, casi solo de mi casa al trabajo","Salgo al aire libre un par de veces por semana","Tengo contacto con la naturaleza o el aire libre casi todos los días","Es parte de mi rutina: luz de la mañana y tiempo afuera que me recarga"],
+    "id": "naturaleza",
+    "name": "Conexión con la Naturaleza",
+    "short": "Naturaleza",
+    "icon": "🌿",
+    "science": "Un estudio publicado en Frontiers in Psychology (2019) demostró que 20 minutos en un espacio verde reducen el cortisol un 13%. La exposición a luz solar matutina es una de las intervenciones más efectivas para sincronizar el ritmo circadiano.",
+    "source": "Dr. Andrew Huberman — neurocientífico, Stanford",
+    "question": "¿Cuánto contacto tenés con la naturaleza?",
+    "anchors": [
+      "Paso casi todo el día en interiores",
+      "Salgo poco, mayormente de mi casa al trabajo",
+      "Trato de salir al aire libre un par de veces por semana",
+      "Tengo contacto regular, disfruto estar afuera",
+      "Es parte de mi rutina, me recarga cada día"
+    ]
   },
   {
-    id: "vinculos", name: "Vínculos y Propósito", short: "Vínculos", icon: "🤝",
-    science: "El Estudio de Desarrollo Adulto de Harvard sigue desde 1938 a 724 personas y hoy a sus descendientes: la satisfacción con las relaciones a los 50 predijo la salud a los 80 mejor que el colesterol. Es una asociación, no una prueba de causa, pero se repite en otras investigaciones.",
-    source: "Harvard Study of Adult Development (desde 1938)",
-    question: "¿Cómo están tus vínculos y tu sentido de dirección?",
-    anchors: ["Me faltan vínculos cercanos y siento poca claridad de hacia dónde voy","Tengo algunas personas, pero me cuesta profundizar o pedir apoyo","Tengo gente cercana; podría conectar más y con más dirección","Tengo al menos una persona a quien llamar en una crisis y cierta claridad de rumbo","Relaciones profundas y un propósito que me da energía"],
+    "id": "vinculos",
+    "name": "Vínculos y Propósito",
+    "short": "Vínculos",
+    "icon": "🤝",
+    "science": "El estudio de Harvard sobre Desarrollo Adulto — con 85 años de seguimiento — concluyó que la calidad de las relaciones es el predictor #1 de salud y longevidad. Más que la dieta, el ejercicio o la genética.",
+    "source": "Dr. Robert Waldinger — Harvard Study of Adult Development",
+    "question": "¿Cómo están tus relaciones y tu sentido de dirección?",
+    "anchors": [
+      "Siento que me faltan vínculos cercanos y claridad",
+      "Tengo algunas personas pero me cuesta profundizar",
+      "Tengo gente, podría conectar más y con más dirección",
+      "Buenos vínculos y cierta claridad de hacia dónde voy",
+      "Relaciones profundas y un propósito que me da energía"
+    ]
   },
   {
-    id: "suplementacion", name: "Suplementación Consciente", short: "Suplementos", icon: "💊",
-    science: "Los suplementos sirven cuando cubren una carencia confirmada. En el ensayo VITAL, la vitamina D3 redujo el acortamiento de telómeros en un subgrupo de 1.054 personas, pero eso es un marcador, no prueba de menos enfermedad; con omega-3 no se vio ese efecto. Por eso el punto de partida es siempre un análisis y un profesional.",
-    source: "Ensayo VITAL (vitamina D y omega-3), subestudio de telómeros, 2025",
-    question: "¿Cómo es tu enfoque con la suplementación?",
-    anchors: ["No tomo nada, o tomo cosas sin saber si las necesito","Tomo algo básico sin haberme hecho análisis","Tomo algunos suplementos según lo que investigué por mi cuenta","Tengo un protocolo con orientación profesional","Mi protocolo se basa en análisis de sangre y seguimiento profesional"],
+    "id": "suplementacion",
+    "name": "Suplementación Inteligente",
+    "short": "Suplementos",
+    "icon": "💊",
+    "science": "La suplementación sin análisis previos es adivinar. Estudios poblacionales muestran que más del 40% de las personas tienen deficiencia de vitamina D, esencial para inmunidad, ánimo y salud ósea. Los suplementos funcionan cuando cubren un déficit real.",
+    "source": "Dra. Rhonda Patrick — bioquímica, FoundMyFitness",
+    "question": "¿Cómo es tu enfoque con la suplementación?",
+    "anchors": [
+      "No tomo nada o tomo cosas sin saber si las necesito",
+      "Tomo algo básico sin haberme hecho análisis",
+      "Algunos suplementos con cierta investigación propia",
+      "Tengo un protocolo con alguna orientación profesional",
+      "Protocolo con análisis de sangre y seguimiento"
+    ]
   },
   {
-    id: "digital", name: "Higiene Digital", short: "Digital", icon: "📱",
-    science: "Lo más consistente en la investigación sobre pantallas es la relación entre uso nocturno y peor sueño, sobre todo en adolescentes; en adultos depende de cómo y para qué las usás. No se trata de culparte: se trata de decidir cuándo y para qué.",
-    source: "Revisiones sistemáticas sobre pantallas, sueño y salud mental",
-    question: "¿Cómo es tu relación con las pantallas?",
-    anchors: ["El celular es lo último que miro de noche y lo primero al despertar, y pierdo la noción del tiempo","Uso mucho las pantallas y me cuesta soltarlas, incluso cuando quiero","Intento poner límites, pero no siempre los sostengo","Tengo límites claros la mayor parte del tiempo, también a la noche","Uso las pantallas con intención, con horarios y zonas libres de pantalla"],
-  },
+    "id": "digital",
+    "name": "Higiene Digital",
+    "short": "Digital",
+    "icon": "📱",
+    "science": "El scroll infinito activa el mismo circuito de dopamina que una máquina tragamonedas: recompensa variable que genera dependencia. La luz azul nocturna suprime la producción de melatonina, afectando directamente la calidad del sueño.",
+    "source": "Dra. Anna Lembke — Stanford Addiction Medicine",
+    "question": "¿Cómo es tu relación con las pantallas?",
+    "anchors": [
+      "Estoy mucho en el celular, incluso de noche en la cama",
+      "Uso bastante las pantallas, me cuesta soltar",
+      "Intento poner límites pero no siempre lo logro",
+      "Tengo límites claros la mayor parte del tiempo",
+      "Uso intencional con zonas y horarios libres de pantallas"
+    ]
+  }
 ];
 
 export const TIPS = {
-  sueno: [
-    "Empecemos por lo más simple: elegí una hora fija para levantarte y sostenela toda la semana. Ordenar el despertar ordena todo lo demás.",
-    "Probá fijar un rango de 1 hora para acostarte y dejá el celular cargando fuera de la cama. Un cambio chiquito, sostenido.",
-    "Ya dormís lo suficiente: ahora ganás con la regularidad. Intentá que tu hora de levantarte no cambie más de 1 hora, ni en fin de semana.",
-    "Sumá luz natural en la primera hora del día y una rutina de bajada de 30 minutos antes de dormir.",
-    "Tu sueño es un pilar. Anotá qué hábitos lo cuidan y compartilos con alguien que lo necesite.",
+  "sueno": [
+    "Elegí una hora fija para acostarte y mantenela toda la semana — incluyendo fines de semana. La consistencia importa más que la cantidad.",
+    "Creá una rutina pre-sueño: 60 min antes empezá a bajar luces y dejá el celular fuera del cuarto.",
+    "Sumá el 'protocolo de luz': exponete a sol natural en los primeros 30 min del día para sincronizar tu reloj biológico.",
+    "Optimizá tu ambiente: cuarto oscuro, temperatura 18-20°C, sin pantallas en la habitación.",
+    "Experimentá con un diario de sueño para identificar qué hábitos mejoran tu descanso y cuáles lo sabotean."
   ],
-  alimentacion: [
-    "Elegí una sola comida del día para hacerla con comida real y proteína (huevo, legumbres, pescado, carne o lácteos). Una, no todas.",
-    "Sumá una porción de vegetales a dos comidas por día y reemplazá un ultraprocesado por una opción simple.",
-    "Armá tus platos con una base fija: proteína + vegetal + algo de carbohidrato real. Cocinar dos veces por semana para varios días ayuda.",
-    "Ya tenés buena base. Sumá un ayuno digestivo nocturno de 12 horas (cenás a las 20, desayunás a las 8) y cuidá la proteína en el desayuno.",
-    "Sostené lo que funciona y probá una receta nueva por semana. Si una comida se sale del plan, seguís igual, sin culpa.",
+  "alimentacion": [
+    "Sumá una porción de vegetales verdes a una comida por día. Un solo cambio sostenido ya genera impacto real.",
+    "Reemplazá un ultraprocesado por día con comida real: fruta, frutos secos, huevo o legumbres.",
+    "Probá definir una ventana de alimentación de 12hs (ej: desayunás a las 8 → cenás antes de las 20).",
+    "Sumá más proteína de calidad y grasas saludables: palta, aceite de oliva, frutos secos.",
+    "Seguí escuchando a tu cuerpo. Podés experimentar con nuevos alimentos o recetas que te nutran más."
   ],
-  movimiento: [
-    "Empezá con una caminata de 10 a 15 minutos, una vez al día. No hace falta más para empezar.",
-    "Sumá un día fijo para moverte con algo que disfrutes (bailar, nadar, bici) y subí de a poco tu caminata diaria.",
-    "Sumá fuerza 1 vez por semana: sentadillas, empujes y remos con tu propio peso o bandas. Si tenés alguna condición, empezá con orientación profesional.",
-    "Llevá la fuerza a 2 veces por semana y sumá 10 minutos de movilidad. Probá levantarte de una silla 5 veces seguidas sin usar las manos.",
-    "Tu base es sólida. Variá estímulos (fuerza, caminata rápida, movilidad) y cuidá la recuperación.",
+  "movimiento": [
+    "Empezá caminando 15 min al día. Es la intervención con mejor relación esfuerzo-resultado según la evidencia.",
+    "Sumá una actividad que disfrutes 2 veces por semana. No tiene que ser el gym: bailar, nadar o bici cuentan.",
+    "Incorporá algo de fuerza: sentadillas, flexiones o bandas elásticas. Tu masa muscular es clave para la longevidad.",
+    "Agregá 10 min de movilidad y estiramientos post-entreno. Previene lesiones y mejora la recuperación.",
+    "Desafiate: ¿podés subir 4 pisos sin agitarte? ¿Levantarte del piso sin manos? Tests funcionales reales."
   ],
-  estres: [
-    "Probá respirar lento 2 minutos: inhalá por la nariz, exhalá más largo que la inhalación. Hacelo hoy, una sola vez.",
-    "Elegí UNA práctica de 5 minutos (respirar, caminar sin celular o escribir) y atala a algo que ya hacés todos los días.",
-    "Usá tu práctica antes del pico de estrés, no después. Poné una alarma suave en el momento del día que más te acelera.",
-    "Sumá una pausa de recuperación en tu semana: tiempo afuera, un rato sin pantallas o una charla que te baje el ritmo.",
-    "Tu regulación es una fortaleza. Compartí lo que te funciona con alguien cercano.",
+  "estres": [
+    "Probá la respiración 4-7-8 (inhalar 4s, retener 7s, exhalar 8s) tres veces antes de cada comida. Son 60 segundos.",
+    "Elegí UNA práctica de regulación y dedicale 5 min diarios: respiración, journaling o caminata sin celular.",
+    "Identificá tus 3 mayores fuentes de estrés y anotá una pequeña acción para cada una esta semana.",
+    "Sumá prácticas de recuperación activa: tiempo en naturaleza, meditación guiada o contacto con agua fría.",
+    "Compartí lo que aprendiste. Enseñar una técnica consolida el hábito y multiplica el impacto."
   ],
-  emocional: [
-    "Empecemos suave: tres veces por semana, escribí en una línea qué sentiste y dónde lo sentiste en el cuerpo.",
-    "Al sentir algo fuerte, frená 10 segundos y ponele nombre: 'estoy sintiendo…'. Nombrarlo ayuda a bajarle intensidad.",
-    "Sumá un mini-registro diario de 3 minutos y elegí a una persona de confianza con quien hablar de lo importante.",
-    "Considerá sumar un espacio de acompañamiento (terapia o coaching) para profundizar lo que ya venís trabajando.",
-    "Tu trabajo emocional es un recurso. Cuidalo con descanso y comunidad.",
+  "emocional": [
+    "Empezá un mini-diario emocional: 3 min al día escribiendo qué sentiste y qué lo disparó.",
+    "Practicá nombrar tus emociones en voz alta. Ponerle nombre reduce su intensidad automáticamente.",
+    "Explorá un espacio de acompañamiento (terapia, coaching) como lugar seguro para profundizar.",
+    "Sumá prácticas somáticas: yoga, breathwork o meditación con foco en las sensaciones corporales.",
+    "Tu inteligencia emocional es un activo enorme. Podés usarla para acompañar a otros en su proceso."
   ],
-  naturaleza: [
-    "Salí 10 minutos afuera, con la luz del día, sin celular. Una vez al día alcanza para empezar.",
-    "Llevá una actividad que ya hacés (el mate, una llamada, una caminata) al aire libre, dos veces por semana.",
-    "Buscá tu dosis de luz de la mañana: unos minutos afuera en la primera hora del día, y un paseo por un espacio verde en el fin de semana.",
-    "Sumá un rato más largo (una hora o más) en un lugar verde o con agua, una vez por semana.",
-    "Seguí cuidando tu vínculo con la naturaleza y animá a alguien a acompañarte.",
+  "naturaleza": [
+    "Salí a caminar 20 min en un espacio verde esta semana. Suficiente para reducir cortisol mediblemente.",
+    "Almorzá afuera cuando puedas o caminá descalzo/a en pasto. Las dosis pequeñas cuentan.",
+    "Convertí una actividad semanal en outdoor: caminata, lectura en un parque, mate al sol.",
+    "Llevá tu práctica de ejercicio o meditación al aire libre cuando el clima lo permita.",
+    "Probá una inmersión larga en naturaleza (2+ horas) al menos una vez al mes."
   ],
-  vinculos: [
-    "Escribile hoy a una persona que valorás, algo genuino y breve. Un vínculo, un mensaje.",
-    "Elegí una conversación por semana, sin pantallas, con alguien importante. Y animate a pedir un apoyo concreto.",
-    "Sumá un espacio de comunidad (un grupo, un curso, una actividad) y mantené una cita fija con una persona cercana.",
-    "Profundizá con presencia: preguntá una cosa más, escuchá sin resolver. Y revisá qué te da dirección esta etapa.",
-    "Tus vínculos son un pilar. Cuidalos con intención y contá qué te da propósito.",
+  "vinculos": [
+    "Esta semana escribile a una persona que valorás. No un 'hola qué tal' — algo genuino y personal.",
+    "Priorizá una conversación profunda por semana con alguien importante. Sin celular en la mesa.",
+    "Considerá sumarte a un grupo o comunidad alineada con algo que te interese.",
+    "Profundizá con más vulnerabilidad y presencia. Son el combustible de las relaciones reales.",
+    "Seguí nutriendo tu red con intención. Tus relaciones son tu mayor activo de salud según la ciencia."
   ],
-  suplementacion: [
-    "Antes de tomar nada nuevo, consultá con tu médico/a qué análisis te corresponden. Sin datos, es adivinar.",
-    "Hacé una lista de lo que tomás hoy y llevala a tu próxima consulta para revisar si lo necesitás.",
-    "Contrastá lo que investigaste con un profesional de salud y con tus análisis, antes de seguir sumando.",
-    "Revisá tu protocolo con tu profesional cada tanto y actualizalo según tus análisis.",
-    "Tu enfoque basado en datos es excelente. Seguí ajustando con tu profesional.",
+  "suplementacion": [
+    "Antes de tomar suplementos, hacete un análisis de sangre completo. Sin datos, estás adivinando.",
+    "Los 3 con más evidencia: vitamina D (si no tomás sol), magnesio y omega-3. Consultá dosis con un profesional.",
+    "Revisá lo que tomás con un profesional para validar si realmente lo necesitás según tus niveles.",
+    "Actualizá tu protocolo cada 6 meses con nuevos análisis. Tu cuerpo cambia constantemente.",
+    "Tu enfoque basado en datos es excelente. Seguí ajustando con información real y profesional."
   ],
-  digital: [
-    "Esta noche, dejá el celular cargando fuera de la cama. Si lo usás de alarma, probá un despertador simple.",
-    "Apagá las notificaciones que no son esenciales y elegí 2 momentos del día para revisar redes.",
-    "Definí una zona o un horario sin pantallas (la mesa, la última hora antes de dormir) y sostenelo una semana.",
-    "Sumá momentos sin estímulo digital en tu día: caminar, cocinar, mirar por la ventana. Tu mente también necesita pausa.",
-    "Tu uso es intencional. Compartí tus estrategias con alguien que quiera ordenar el suyo.",
-  ],
+  "digital": [
+    "Sacá el celular del cuarto a la noche. Si lo usás como alarma, invertí en un reloj despertador.",
+    "Desactivá notificaciones no esenciales. Cada interrupción te saca del foco por hasta 23 minutos.",
+    "Definí una 'zona libre de pantallas' en tu casa: la mesa de comer, tu cuarto, o ambos.",
+    "Sumá momentos sin estímulo digital: tu cerebro necesita esos espacios para entrar en modo reparación.",
+    "Tu relación con la tecnología es saludable. Compartí tus estrategias con alguien que lo necesite."
+  ]
 };
 
-export const LABELS = ["Necesita cuidado", "En construcción", "En desarrollo", "Buen camino", "Fortaleza"];
+export const LABELS = ["Necesita atención","En riesgo","En desarrollo","Buen camino","Fortaleza"];

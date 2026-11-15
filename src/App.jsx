@@ -118,10 +118,7 @@ export default function App() {
         <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:10,marginBottom:22}}>
           {[["🔬","Ciencia actual","Estudios publicados, 2023–2026"],["⏱️","3 minutos","9 preguntas, resultados al instante"],["🎯","Primeros pasos","Acciones simples para vos"]].map(([ic,t,d])=><div key={t} style={{background:"#FDFAF5",border:`1.5px solid ${bd}`,borderRadius:14,padding:"16px 10px",textAlign:"center"}}><span style={{fontSize:22,display:"block",marginBottom:6}}>{ic}</span><span style={{fontSize:13.5,fontWeight:700,display:"block",marginBottom:3}}>{t}</span><span style={{fontSize:12.5,lineHeight:1.4,color:"#4A3B33"}}>{d}</span></div>)}
         </div>
-        <div style={{background:"#FDFAF5",border:`1.5px solid ${bd}`,borderRadius:14,padding:"14px 18px",textAlign:"center",marginBottom:26}}>
-          <p style={{fontSize:12.5,fontWeight:700,textTransform:"uppercase",letterSpacing:"0.08em",color:"#4A3B33",marginBottom:5}}>Basado en estudios publicados</p>
-          <p style={{fontFamily:sf,fontSize:13,fontStyle:"italic",color:"#4A3B33",lineHeight:1.5}}>The Lancet Public Health · JAMA Network Open · Harvard Study of Adult Development · ensayo VITAL</p>
-        </div>
+        
         <button onClick={()=>{setPhase("questions");scrollTop()}} style={btn}>Comenzar mi mapa</button>
         <p style={{textAlign:"center",fontSize:13.5,color:"#4A3B33",marginTop:12}}>100% gratuito · Resultados inmediatos · Tu información es privada</p>
       </div>}

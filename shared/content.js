@@ -1,4 +1,4 @@
-// Contenido del quiz (versión de abril, restaurada). Compartido entre la app y el mail.
+// Contenido del quiz (versión de abril, restaurada y con novedades). Compartido entre la app y el mail.
 export const EDITION = "Edición 2026";
 
 export const AREAS = [
@@ -7,7 +7,7 @@ export const AREAS = [
     "name": "Sueño Reparador",
     "short": "Sueño",
     "icon": "🌙",
-    "science": "Mientras dormís profundamente, tu cerebro activa el sistema glinfático: una red que elimina proteínas tóxicas acumuladas durante el día. Estudios en UC Berkeley muestran que dormir menos de 6 horas de forma crónica debilita las defensas y acelera el deterioro cognitivo.",
+    "science": "Mientras dormís profundamente, tu cerebro activa el sistema glinfático: una red que elimina proteínas tóxicas acumuladas durante el día. Estudios en UC Berkeley muestran que dormir menos de 6 horas de forma crónica debilita las defensas y acelera el deterioro cognitivo. Y la regularidad de tus horarios importa casi tanto como las horas.",
     "source": "Dr. Matthew Walker — neurocientífico, UC Berkeley",
     "question": "¿Cómo es tu sueño habitualmente?",
     "anchors": [
@@ -23,7 +23,7 @@ export const AREAS = [
     "name": "Alimentación Consciente",
     "short": "Alimentación",
     "icon": "🥗",
-    "science": "Lo que comés es información directa para tus genes. Períodos sin comer activan la autofagia — un proceso de limpieza celular que elimina componentes dañados. No solo importa qué comés, sino cuándo: el horario influye en tu metabolismo e inflamación.",
+    "science": "Lo que comés es información directa para tus genes. No solo importa qué comés, sino cuándo: dejar un ayuno digestivo de al menos 12 horas entre la cena y el desayuno le da a tu cuerpo un descanso para su limpieza celular (autofagia). Un ensayo en personas del equipo de Valter Longo mostró mejoras metabólicas con ciclos de dieta que imita el ayuno.",
     "source": "Dr. Valter Longo — Instituto de Longevidad, USC",
     "question": "¿Cómo es tu relación con la alimentación?",
     "anchors": [
@@ -39,7 +39,7 @@ export const AREAS = [
     "name": "Movimiento Diario",
     "short": "Movimiento",
     "icon": "🏃",
-    "science": "El ejercicio libera BDNF, una proteína que estimula el crecimiento de nuevas neuronas. Estudios muestran que caminar solo 15 minutos al día reduce el riesgo cardiovascular un 22%. Después de los 40, la masa muscular es uno de los mejores predictores de longevidad.",
+    "science": "El ejercicio libera BDNF, una proteína que estimula el crecimiento de nuevas neuronas. Un metaanálisis en The Lancet Public Health muestra que los beneficios de caminar se estabilizan cerca de los 7.000 pasos diarios. Después de los 40, la fuerza muscular es uno de los mejores predictores de longevidad.",
     "source": "Dr. Peter Attia — médico, especialista en longevidad",
     "question": "¿Cuánto movimiento hacés por semana?",
     "anchors": [
@@ -55,7 +55,7 @@ export const AREAS = [
     "name": "Gestión del Estrés",
     "short": "Estrés",
     "icon": "🧘‍♀️",
-    "science": "El estrés crónico acorta los telómeros — los protectores de tu ADN — acelerando el envejecimiento celular. Pero la investigación de Blackburn y Epel demostró que prácticas de regulación como la meditación pueden proteger y preservar los telómeros con el tiempo.",
+    "science": "El estrés crónico acorta los telómeros — los protectores de tu ADN — acelerando el envejecimiento celular. Pero la investigación de Blackburn y Epel asoció prácticas de regulación como la meditación con telómeros mejor conservados.",
     "source": "Dra. Elizabeth Blackburn y Dra. Elissa Epel — Premio Nobel 2009",
     "question": "¿Cómo gestionás el estrés del día a día?",
     "anchors": [
@@ -87,7 +87,7 @@ export const AREAS = [
     "name": "Conexión con la Naturaleza",
     "short": "Naturaleza",
     "icon": "🌿",
-    "science": "Un estudio publicado en Frontiers in Psychology (2019) demostró que 20 minutos en un espacio verde reducen el cortisol un 13%. La exposición a luz solar matutina es una de las intervenciones más efectivas para sincronizar el ritmo circadiano.",
+    "science": "Un estudio publicado en Frontiers in Psychology (2019) demostró que 20 minutos en un espacio verde reducen el cortisol. La exposición a luz solar matutina es una de las intervenciones más efectivas para sincronizar el ritmo circadiano.",
     "source": "Dr. Andrew Huberman — neurocientífico, Stanford",
     "question": "¿Cuánto contacto tenés con la naturaleza?",
     "anchors": [
@@ -103,7 +103,7 @@ export const AREAS = [
     "name": "Vínculos y Propósito",
     "short": "Vínculos",
     "icon": "🤝",
-    "science": "El estudio de Harvard sobre Desarrollo Adulto — con 85 años de seguimiento — concluyó que la calidad de las relaciones es el predictor #1 de salud y longevidad. Más que la dieta, el ejercicio o la genética.",
+    "science": "El estudio de Harvard sobre Desarrollo Adulto, en marcha desde 1938, mostró que la calidad de las relaciones es uno de los predictores más fuertes de salud y longevidad.",
     "source": "Dr. Robert Waldinger — Harvard Study of Adult Development",
     "question": "¿Cómo están tus relaciones y tu sentido de dirección?",
     "anchors": [
@@ -119,7 +119,7 @@ export const AREAS = [
     "name": "Suplementación Inteligente",
     "short": "Suplementos",
     "icon": "💊",
-    "science": "La suplementación sin análisis previos es adivinar. Estudios poblacionales muestran que más del 40% de las personas tienen deficiencia de vitamina D, esencial para inmunidad, ánimo y salud ósea. Los suplementos funcionan cuando cubren un déficit real.",
+    "science": "La suplementación sin análisis previos es adivinar. Un ensayo con 1.054 personas (VITAL) mostró que la vitamina D3 ayudó a proteger los telómeros. Los suplementos funcionan cuando cubren un déficit real.",
     "source": "Dra. Rhonda Patrick — bioquímica, FoundMyFitness",
     "question": "¿Cómo es tu enfoque con la suplementación?",
     "anchors": [

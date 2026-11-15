@@ -11,10 +11,10 @@ export const AREAS = [
   },
   {
     id: "alimentacion", name: "Alimentación Consciente", short: "Alimentación", icon: "🥗",
-    science: "Lo que comés pesa más que el reloj. Sobre ayuno y 'autofagia' en personas la evidencia todavía es preliminar: los ensayos son chicos y de corto plazo. Lo que sí tiene consenso: comida real, proteína suficiente, vegetales y horarios ordenados.",
-    source: "Ensayos de alimentación con horario (2025) y guías de nutrición",
+    science: "Lo que comés pesa más que el reloj, pero el reloj también cuenta: darle a tu cuerpo un ayuno digestivo (por ejemplo, 12 horas entre la cena y el desayuno) es una práctica simple. El equipo del Dr. Valter Longo (USC) vio en ensayos con personas mejoras metabólicas con ciclos de dieta que imita el ayuno, y un estudio piloto de 2025 con 30 adultos midió señales de autofagia. Son estudios chicos y cortos, y parte está financiada por una empresa de Longo: es promisorio, no definitivo.",
+    source: "Longo y colaboradores: Nature Communications (2024) y GeroScience (2025)",
     question: "¿Cómo es tu alimentación en una semana normal?",
-    anchors: ["Casi todo ultraprocesado, salteo comidas o como por impulso","Mitad comida real, mitad procesada, con horarios desordenados","Cocino bastante, pero me cuesta sumar proteína y vegetales todos los días","Comida real la mayoría de los días, con proteína y vegetales en casi todas las comidas","Alimentación variada y real, con proteína suficiente, horarios ordenados y sin culpa en los desvíos"],
+    anchors: ["Casi todo lo que como es procesado, o salteo comidas","Predominan los procesados y como a cualquier hora","La mitad de los días como comida real","Comida real casi todos los días, con proteína y verduras en la mayoría de las comidas","Comida real casi siempre, con proteína y verduras, y 12 horas o más sin comer entre la cena y el desayuno"],
   },
   {
     id: "movimiento", name: "Movimiento y Fuerza", short: "Movimiento", icon: "🏃",
@@ -79,7 +79,7 @@ export const TIPS = {
     "Elegí una sola comida del día para hacerla con comida real y proteína (huevo, legumbres, pescado, carne o lácteos). Una, no todas.",
     "Sumá una porción de vegetales a dos comidas por día y reemplazá un ultraprocesado por una opción simple.",
     "Armá tus platos con una base fija: proteína + vegetal + algo de carbohidrato real. Cocinar dos veces por semana para varios días ayuda.",
-    "Ya tenés buena base. Cuidá la proteína en el desayuno y ordená el horario de la cena para dormir mejor.",
+    "Ya tenés buena base. Sumá un ayuno digestivo nocturno de 12 horas (cenás a las 20, desayunás a las 8) y cuidá la proteína en el desayuno.",
     "Sostené lo que funciona y probá una receta nueva por semana. Si una comida se sale del plan, seguís igual, sin culpa.",
   ],
   movimiento: [

@@ -108,9 +108,10 @@ export default function App() {
 
       {phase==="landing"&&<div style={{animation:"fadeUp 0.6s ease"}}>
         <div style={{textAlign:"center",marginBottom:30}}>
+          <img src="/logo.svg" alt="Daniela Navarro · Longevidad Emocional" style={{display:"block",margin:"0 auto 22px",width:"min(230px,62%)",height:"auto"}}/>
           <div style={{display:"inline-block",background:"#E4D3CD",color:"#4A3B33",fontSize:12.5,fontWeight:700,letterSpacing:"0.07em",textTransform:"uppercase",padding:"6px 16px",borderRadius:40,marginBottom:20}}>{EDITION} · Autoconocimiento y longevidad</div>
           <h1 style={{fontFamily:sf,fontSize:36,fontWeight:600,lineHeight:1.1}}>Mapa de<br/>Bienestar Interior</h1>
-          <p style={{fontSize:14,color:"#4A3B33",marginTop:10}}>by <strong style={{color:"#4A3B33"}}>Dani Navarro</strong></p>
+          <p style={{fontSize:14,color:"#4A3B33",marginTop:10}}>por <strong style={{color:"#4A3B33"}}>Daniela Navarro</strong></p>
           <div style={{width:36,height:2.5,background:g,margin:"18px auto",borderRadius:2}}/>
           <p style={{fontSize:15,lineHeight:1.65,color:"#4A3B33",maxWidth:400,margin:"0 auto"}}>Descubrí en <strong style={{color:"#4A3B33"}}>3 minutos</strong> cómo están las 9 áreas fundamentales de tu bienestar y recibí <strong style={{color:"#4A3B33"}}>primeros pasos concretos</strong> para tus áreas prioritarias.</p>
         </div>
